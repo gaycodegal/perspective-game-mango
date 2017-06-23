@@ -13,8 +13,13 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    private var spriteButton : SKSpriteNode?
+    
+    let sound = SKAction.playSoundFileNamed("synth.mp3", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
+        
+        spriteButton = self.childNode(withName: "spriteButton") as? SKSpriteNode
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -78,7 +83,13 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches {
+            if (spriteButton?.contains(t.location(in: self)))! {
+                run(sound)
+            }
+            self.touchUp(atPoint: t.location(in: self))
+        }
+        
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

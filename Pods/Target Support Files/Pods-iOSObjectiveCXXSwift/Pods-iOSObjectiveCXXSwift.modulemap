@@ -1,0 +1,6 @@
+framework module Pods_iOSObjectiveCXXSwift {
+  umbrella header "Pods-iOSObjectiveCXXSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

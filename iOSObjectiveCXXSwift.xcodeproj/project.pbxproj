@@ -24,6 +24,8 @@
 		1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFC1EEB2B22009F6579 /* Assets.xcassets */; };
 		1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */; };
 		1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */; };
+		8DBD6B17571A4126E9607BAF /* Pods_iOSObjectiveCXXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390BF9332DD4071752395765 /* Pods_iOSObjectiveCXXSwift.framework */; };
+		921D85411EFD6E3B003F5AEC /* synth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 921D85401EFD6E3B003F5AEC /* synth.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,10 @@
 		1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSObjectiveCXXSwift-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjcMethods.h; sourceTree = "<group>"; };
 		1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestObjcMethods.mm; sourceTree = "<group>"; };
+		390BF9332DD4071752395765 /* Pods_iOSObjectiveCXXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSObjectiveCXXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83EA4E7B4AD334C17BA6280B /* Pods-iOSObjectiveCXXSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSObjectiveCXXSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSObjectiveCXXSwift/Pods-iOSObjectiveCXXSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		921D85401EFD6E3B003F5AEC /* synth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = synth.mp3; path = ../synth.mp3; sourceTree = "<group>"; };
+		E0A171032EDF60BEC43BAE43 /* Pods-iOSObjectiveCXXSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSObjectiveCXXSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSObjectiveCXXSwift/Pods-iOSObjectiveCXXSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBD6B17571A4126E9607BAF /* Pods_iOSObjectiveCXXSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +124,8 @@
 			children = (
 				1885FCEE1EEB2B22009F6579 /* iOSObjectiveCXXSwift */,
 				1885FCED1EEB2B22009F6579 /* Products */,
+				D36ECA68CC9F7D5351C8A9C4 /* Pods */,
+				98B09023A3C2F2C461B4CEF0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,10 +153,37 @@
 				1885FCF71EEB2B22009F6579 /* GameViewController.swift */,
 				1885FCF91EEB2B22009F6579 /* Main.storyboard */,
 				1885FCFC1EEB2B22009F6579 /* Assets.xcassets */,
+				921D853F1EFD6E2E003F5AEC /* sounds */,
 				1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */,
 				1885FD011EEB2B22009F6579 /* Info.plist */,
 			);
 			path = iOSObjectiveCXXSwift;
+			sourceTree = "<group>";
+		};
+		921D853F1EFD6E2E003F5AEC /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				921D85401EFD6E3B003F5AEC /* synth.mp3 */,
+			);
+			name = sounds;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		98B09023A3C2F2C461B4CEF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				390BF9332DD4071752395765 /* Pods_iOSObjectiveCXXSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D36ECA68CC9F7D5351C8A9C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83EA4E7B4AD334C17BA6280B /* Pods-iOSObjectiveCXXSwift.debug.xcconfig */,
+				E0A171032EDF60BEC43BAE43 /* Pods-iOSObjectiveCXXSwift.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,9 +193,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1885FD041EEB2B22009F6579 /* Build configuration list for PBXNativeTarget "iOSObjectiveCXXSwift" */;
 			buildPhases = (
+				3CAAAF6C40CCF9DC11881703 /* [CP] Check Pods Manifest.lock */,
 				1885FCE81EEB2B22009F6579 /* Sources */,
 				1885FCE91EEB2B22009F6579 /* Frameworks */,
 				1885FCEA1EEB2B22009F6579 /* Resources */,
+				10A5C727DC9BA5D762B05069 /* [CP] Embed Pods Frameworks */,
+				F768A6614963E4AC65AF01A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				921D85411EFD6E3B003F5AEC /* synth.mp3 in Resources */,
 				1885FCFB1EEB2B22009F6579 /* Main.storyboard in Resources */,
 				1885FCF21EEB2B22009F6579 /* GameScene.sks in Resources */,
 				1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */,
@@ -221,6 +261,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10A5C727DC9BA5D762B05069 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSObjectiveCXXSwift/Pods-iOSObjectiveCXXSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CAAAF6C40CCF9DC11881703 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F768A6614963E4AC65AF01A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSObjectiveCXXSwift/Pods-iOSObjectiveCXXSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1885FCE81EEB2B22009F6579 /* Sources */ = {
@@ -360,6 +448,7 @@
 		};
 		1885FD051EEB2B22009F6579 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83EA4E7B4AD334C17BA6280B /* Pods-iOSObjectiveCXXSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -376,6 +465,7 @@
 		};
 		1885FD061EEB2B22009F6579 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0A171032EDF60BEC43BAE43 /* Pods-iOSObjectiveCXXSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
