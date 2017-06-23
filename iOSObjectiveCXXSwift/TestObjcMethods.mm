@@ -8,7 +8,7 @@
 
 #import "TestObjcMethods.h"
 #include <iostream>
-#include "sniffle-interpreter/headers/interp.h"
+#include "interpreter/headers/interp.h"
 
 void dangerWillRobinson(int x){
     std::cout << "hi " << x << std::endl;

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1854580D1EEC9141001BF5BB /* lowpolycat.png */; };
+		1864A64B1EFC9BF500D51311 /* expressions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6441EFC9BF500D51311 /* expressions.cpp */; };
+		1864A64C1EFC9BF500D51311 /* filereader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6451EFC9BF500D51311 /* filereader.cpp */; };
+		1864A64D1EFC9BF500D51311 /* interp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6461EFC9BF500D51311 /* interp.cpp */; };
+		1864A64E1EFC9BF500D51311 /* lambdafunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6471EFC9BF500D51311 /* lambdafunc.cpp */; };
+		1864A64F1EFC9BF500D51311 /* parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6481EFC9BF500D51311 /* parse.cpp */; };
+		1864A6501EFC9BF500D51311 /* printexpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6491EFC9BF500D51311 /* printexpression.cpp */; };
+		1864A6511EFC9BF500D51311 /* slist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A64A1EFC9BF500D51311 /* slist.cpp */; };
 		1885FCF01EEB2B22009F6579 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1885FCEF1EEB2B22009F6579 /* AppDelegate.swift */; };
 		1885FCF21EEB2B22009F6579 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCF11EEB2B22009F6579 /* GameScene.sks */; };
 		1885FCF41EEB2B22009F6579 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCF31EEB2B22009F6579 /* Actions.sks */; };
@@ -17,17 +24,27 @@
 		1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFC1EEB2B22009F6579 /* Assets.xcassets */; };
 		1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */; };
 		1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */; };
-		18AFF6681EEB2FC4005FBF3E /* expressions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6611EEB2FC4005FBF3E /* expressions.cpp */; };
-		18AFF6691EEB2FC4005FBF3E /* filereader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6621EEB2FC4005FBF3E /* filereader.cpp */; };
-		18AFF66A1EEB2FC4005FBF3E /* interp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6631EEB2FC4005FBF3E /* interp.cpp */; };
-		18AFF66B1EEB2FC4005FBF3E /* lambdafunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6641EEB2FC4005FBF3E /* lambdafunc.cpp */; };
-		18AFF66C1EEB2FC4005FBF3E /* parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6651EEB2FC4005FBF3E /* parse.cpp */; };
-		18AFF66D1EEB2FC4005FBF3E /* printexpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6661EEB2FC4005FBF3E /* printexpression.cpp */; };
-		18AFF66E1EEB2FC4005FBF3E /* slist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18AFF6671EEB2FC4005FBF3E /* slist.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1854580D1EEC9141001BF5BB /* lowpolycat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowpolycat.png; sourceTree = "<group>"; };
+		1864A6441EFC9BF500D51311 /* expressions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expressions.cpp; sourceTree = "<group>"; };
+		1864A6451EFC9BF500D51311 /* filereader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filereader.cpp; sourceTree = "<group>"; };
+		1864A6461EFC9BF500D51311 /* interp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interp.cpp; sourceTree = "<group>"; };
+		1864A6471EFC9BF500D51311 /* lambdafunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lambdafunc.cpp; sourceTree = "<group>"; };
+		1864A6481EFC9BF500D51311 /* parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parse.cpp; sourceTree = "<group>"; };
+		1864A6491EFC9BF500D51311 /* printexpression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = printexpression.cpp; sourceTree = "<group>"; };
+		1864A64A1EFC9BF500D51311 /* slist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slist.cpp; sourceTree = "<group>"; };
+		1864A6531EFC9BFD00D51311 /* datastructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datastructures.h; sourceTree = "<group>"; };
+		1864A6541EFC9BFD00D51311 /* expressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expressions.h; sourceTree = "<group>"; };
+		1864A6551EFC9BFD00D51311 /* filereader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filereader.h; sourceTree = "<group>"; };
+		1864A6561EFC9BFD00D51311 /* interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interp.h; sourceTree = "<group>"; };
+		1864A6571EFC9BFD00D51311 /* lambdafunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lambdafunc.h; sourceTree = "<group>"; };
+		1864A6581EFC9BFD00D51311 /* lispinclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lispinclude.h; sourceTree = "<group>"; };
+		1864A6591EFC9BFD00D51311 /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		1864A65A1EFC9BFD00D51311 /* printexpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = printexpression.h; sourceTree = "<group>"; };
+		1864A65B1EFC9BFD00D51311 /* slist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slist.h; sourceTree = "<group>"; };
+		1864A65C1EFC9BFD00D51311 /* snifflemain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snifflemain.h; sourceTree = "<group>"; };
 		1885FCEC1EEB2B22009F6579 /* iOSObjectiveCXXSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSObjectiveCXXSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1885FCEF1EEB2B22009F6579 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1885FCF11EEB2B22009F6579 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -41,23 +58,6 @@
 		1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSObjectiveCXXSwift-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjcMethods.h; sourceTree = "<group>"; };
 		1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestObjcMethods.mm; sourceTree = "<group>"; };
-		18AFF6611EEB2FC4005FBF3E /* expressions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expressions.cpp; sourceTree = "<group>"; };
-		18AFF6621EEB2FC4005FBF3E /* filereader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filereader.cpp; sourceTree = "<group>"; };
-		18AFF6631EEB2FC4005FBF3E /* interp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interp.cpp; sourceTree = "<group>"; };
-		18AFF6641EEB2FC4005FBF3E /* lambdafunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lambdafunc.cpp; sourceTree = "<group>"; };
-		18AFF6651EEB2FC4005FBF3E /* parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parse.cpp; sourceTree = "<group>"; };
-		18AFF6661EEB2FC4005FBF3E /* printexpression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = printexpression.cpp; sourceTree = "<group>"; };
-		18AFF6671EEB2FC4005FBF3E /* slist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slist.cpp; sourceTree = "<group>"; };
-		18AFF6701EEB2FCC005FBF3E /* datastructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datastructures.h; sourceTree = "<group>"; };
-		18AFF6711EEB2FCC005FBF3E /* expressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expressions.h; sourceTree = "<group>"; };
-		18AFF6721EEB2FCC005FBF3E /* filereader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filereader.h; sourceTree = "<group>"; };
-		18AFF6731EEB2FCC005FBF3E /* interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interp.h; sourceTree = "<group>"; };
-		18AFF6741EEB2FCC005FBF3E /* lambdafunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lambdafunc.h; sourceTree = "<group>"; };
-		18AFF6751EEB2FCC005FBF3E /* lispinclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lispinclude.h; sourceTree = "<group>"; };
-		18AFF6761EEB2FCC005FBF3E /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
-		18AFF6771EEB2FCC005FBF3E /* printexpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = printexpression.h; sourceTree = "<group>"; };
-		18AFF6781EEB2FCC005FBF3E /* slist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slist.h; sourceTree = "<group>"; };
-		18AFF6791EEB2FCC005FBF3E /* snifflemain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snifflemain.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +79,39 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		1864A6431EFC9BF500D51311 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				1864A6441EFC9BF500D51311 /* expressions.cpp */,
+				1864A6451EFC9BF500D51311 /* filereader.cpp */,
+				1864A6461EFC9BF500D51311 /* interp.cpp */,
+				1864A6471EFC9BF500D51311 /* lambdafunc.cpp */,
+				1864A6481EFC9BF500D51311 /* parse.cpp */,
+				1864A6491EFC9BF500D51311 /* printexpression.cpp */,
+				1864A64A1EFC9BF500D51311 /* slist.cpp */,
+			);
+			name = source;
+			path = interpreter/source;
+			sourceTree = "<group>";
+		};
+		1864A6521EFC9BFD00D51311 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				1864A6531EFC9BFD00D51311 /* datastructures.h */,
+				1864A6541EFC9BFD00D51311 /* expressions.h */,
+				1864A6551EFC9BFD00D51311 /* filereader.h */,
+				1864A6561EFC9BFD00D51311 /* interp.h */,
+				1864A6571EFC9BFD00D51311 /* lambdafunc.h */,
+				1864A6581EFC9BFD00D51311 /* lispinclude.h */,
+				1864A6591EFC9BFD00D51311 /* parse.h */,
+				1864A65A1EFC9BFD00D51311 /* printexpression.h */,
+				1864A65B1EFC9BFD00D51311 /* slist.h */,
+				1864A65C1EFC9BFD00D51311 /* snifflemain.h */,
+			);
+			name = headers;
+			path = interpreter/headers;
+			sourceTree = "<group>";
+		};
 		1885FCE31EEB2B22009F6579 = {
 			isa = PBXGroup;
 			children = (
@@ -98,9 +131,9 @@
 		1885FCEE1EEB2B22009F6579 /* iOSObjectiveCXXSwift */ = {
 			isa = PBXGroup;
 			children = (
+				1864A6521EFC9BFD00D51311 /* headers */,
+				1864A6431EFC9BF500D51311 /* source */,
 				1854580C1EEC9141001BF5BB /* resources */,
-				18AFF66F1EEB2FCC005FBF3E /* headers */,
-				18AFF6601EEB2FC4005FBF3E /* source */,
 				1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */,
 				1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */,
 				1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */,
@@ -115,39 +148,6 @@
 				1885FD011EEB2B22009F6579 /* Info.plist */,
 			);
 			path = iOSObjectiveCXXSwift;
-			sourceTree = "<group>";
-		};
-		18AFF6601EEB2FC4005FBF3E /* source */ = {
-			isa = PBXGroup;
-			children = (
-				18AFF6611EEB2FC4005FBF3E /* expressions.cpp */,
-				18AFF6621EEB2FC4005FBF3E /* filereader.cpp */,
-				18AFF6631EEB2FC4005FBF3E /* interp.cpp */,
-				18AFF6641EEB2FC4005FBF3E /* lambdafunc.cpp */,
-				18AFF6651EEB2FC4005FBF3E /* parse.cpp */,
-				18AFF6661EEB2FC4005FBF3E /* printexpression.cpp */,
-				18AFF6671EEB2FC4005FBF3E /* slist.cpp */,
-			);
-			name = source;
-			path = "sniffle-interpreter/source";
-			sourceTree = "<group>";
-		};
-		18AFF66F1EEB2FCC005FBF3E /* headers */ = {
-			isa = PBXGroup;
-			children = (
-				18AFF6701EEB2FCC005FBF3E /* datastructures.h */,
-				18AFF6711EEB2FCC005FBF3E /* expressions.h */,
-				18AFF6721EEB2FCC005FBF3E /* filereader.h */,
-				18AFF6731EEB2FCC005FBF3E /* interp.h */,
-				18AFF6741EEB2FCC005FBF3E /* lambdafunc.h */,
-				18AFF6751EEB2FCC005FBF3E /* lispinclude.h */,
-				18AFF6761EEB2FCC005FBF3E /* parse.h */,
-				18AFF6771EEB2FCC005FBF3E /* printexpression.h */,
-				18AFF6781EEB2FCC005FBF3E /* slist.h */,
-				18AFF6791EEB2FCC005FBF3E /* snifflemain.h */,
-			);
-			name = headers;
-			path = "sniffle-interpreter/headers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,16 +228,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */,
-				18AFF66A1EEB2FC4005FBF3E /* interp.cpp in Sources */,
-				18AFF6681EEB2FC4005FBF3E /* expressions.cpp in Sources */,
-				18AFF6691EEB2FC4005FBF3E /* filereader.cpp in Sources */,
-				18AFF66B1EEB2FC4005FBF3E /* lambdafunc.cpp in Sources */,
-				18AFF66C1EEB2FC4005FBF3E /* parse.cpp in Sources */,
-				18AFF66E1EEB2FC4005FBF3E /* slist.cpp in Sources */,
+				1864A64D1EFC9BF500D51311 /* interp.cpp in Sources */,
+				1864A64B1EFC9BF500D51311 /* expressions.cpp in Sources */,
+				1864A64C1EFC9BF500D51311 /* filereader.cpp in Sources */,
+				1864A64E1EFC9BF500D51311 /* lambdafunc.cpp in Sources */,
+				1864A64F1EFC9BF500D51311 /* parse.cpp in Sources */,
+				1864A6511EFC9BF500D51311 /* slist.cpp in Sources */,
 				1885FCF61EEB2B22009F6579 /* GameScene.swift in Sources */,
 				1885FCF81EEB2B22009F6579 /* GameViewController.swift in Sources */,
 				1885FCF01EEB2B22009F6579 /* AppDelegate.swift in Sources */,
-				18AFF66D1EEB2FC4005FBF3E /* printexpression.cpp in Sources */,
+				1864A6501EFC9BF500D51311 /* printexpression.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
