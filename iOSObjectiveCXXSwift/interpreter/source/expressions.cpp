@@ -40,7 +40,7 @@ void makeString(expression * exp, std::string * old){
 
 expression * makeInt(char * ptr, int length){
   expression * exp = new expression();
-  exp->data.num = strtol(ptr, NULL, 10);
+  exp->data.num = (int)strtol(ptr, NULL, 10);
   exp->type = CONST_EXP;
   return exp;
 }

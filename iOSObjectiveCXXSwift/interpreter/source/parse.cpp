@@ -29,7 +29,7 @@ inline void pushInt(expression * parent, char * data, std::size_t & i){
   char * p = data, c;
   ++p;
   while((c = *(p++)) && c >= '0' && c <= '9');
-  int len = p - data - 1;
+  int len = (int)(p - data - 1);
   addBackElem(parent->data.list, (void *)makeInt(data, len));
   i += len - 1;
   //std::cout << "&" << data << "&" << std::endl;

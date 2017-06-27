@@ -15,7 +15,7 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     private var spriteButton : SKSpriteNode?
     
-    let sound = SKAction.playSoundFileNamed("synth.mp3", waitForCompletion: false)
+    let sound = SKAction.playSoundFileNamed("GymnopedieNo1KevinMacleod.mp3", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
         
