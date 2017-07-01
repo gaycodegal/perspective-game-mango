@@ -28,7 +28,6 @@ class GameScene: SKScene {
         spaceship!.xScale = 0.25
         spaceship!.yScale = 0.25
         spaceship!.position = CGPoint(x: 50, y: 50)
-        self.addChild(spaceship!)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -52,6 +51,7 @@ class GameScene: SKScene {
         
         globalScene = self;
         ObjcShell.addSprite(self);
+        self.addChild(spaceship!)
     }
     
     
