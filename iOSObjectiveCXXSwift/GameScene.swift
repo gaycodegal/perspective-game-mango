@@ -16,10 +16,19 @@ class GameScene: SKScene {
     private var spriteButton : SKSpriteNode?
     
     let sound = SKAction.playSoundFileNamed("GymnopedieNo1KevinMacleod.mp3", waitForCompletion: false)
+    var spaceship: SKSpriteNode?
     
     override func didMove(to view: SKView) {
         
+        //Button for playin sound
         spriteButton = self.childNode(withName: "spriteButton") as? SKSpriteNode
+        
+        //Spaceship sprite
+        spaceship = SKSpriteNode(imageNamed: "Spaceship")
+        spaceship!.xScale = 0.25
+        spaceship!.yScale = 0.25
+        spaceship!.position = CGPoint(x: 50, y: 50)
+        self.addChild(spaceship!)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -71,11 +80,18 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        if let touch:UITouch = touches.first {
+    
+        //Position
+        let pos = touch.location(in: self)
+        
+        //Action
+        let move = SKAction.move(to: pos, duration: 0.5)
+        
+        //Execute
+        spaceship!.run(move)
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
