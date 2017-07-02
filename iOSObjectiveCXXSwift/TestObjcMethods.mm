@@ -16,6 +16,51 @@ void dangerWillRobinson(int x){
 }
 
 /**
+ create a move by skaction as an animation
+ 
+ Sniffle:
+ arg[0] : name of sound file
+ arg[1] : integer(0/1) indicating whether or not to wait until the sound is complete the continue
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
+expression * makeSound(expression * arglist, environment * env, environment * args){
+    expression *name, *wait;
+    slist * list = arglist->data.list;
+    snode * iter = list->head;
+    NSString *fileName;
+    int toWait = 0;
+    if(list->len != 2) {
+        return NULL;
+    }
+    //get name of file
+    name = evalAST((expression *)(iter->elem), env, args);
+    //get wait
+    wait = evalAST((expression *)(iter->elem), env, args);
+    
+    if(name != NULL && name->type == CONST_EXP) {
+        fileName = @(name->data.str->s->c_str());
+    }
+    
+    if(wait != NULL && wait->type == CONST_EXP) {
+        toWait = wait->data.num;
+    }
+    
+    SKAction * snd = [SKAction playSoundFileNamed:fileName waitForCompletion: toWait == 0 ? false : true];
+    
+    [actions addObject:snd];
+    
+    //clean up
+    deleteExpression(name);
+    deleteExpression(wait);
+    
+    //return next index
+    return makeInt(nextActionInd++);
+}
+
+/**
  allocates room for x many sprites
  Sniffle arg[0] (SIZE): how many sprites should we allocated space for
  
@@ -99,7 +144,7 @@ expression * allocateTextureList(expression * arglist, environment * env, enviro
  @param env The environment that this was called in
  @param args The environment of the innermost lambda function or NULL
  */
-expression * allocateAnimationList(expression * arglist, environment * env, environment * args){
+expression * allocateActionsList(expression * arglist, environment * env, environment * args){
     expression * temp;
     slist * list = arglist->data.list;
     int size = 0;
@@ -109,13 +154,13 @@ expression * allocateAnimationList(expression * arglist, environment * env, envi
     if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num;
         if(size > 0){
-            animations = nil;
-            animations = [NSMutableArray arrayWithCapacity:size];
+            actions = nil;
+            actions = [NSMutableArray arrayWithCapacity:size];
         }else{
-            animations = nil;
-            animations = [NSMutableArray arrayWithCapacity:0];
+            actions = nil;
+            actions = [NSMutableArray arrayWithCapacity:0];
         }
-        nextAnimInd = 0;
+        nextActionInd = 0;
     }
 
     //cleanup
@@ -169,7 +214,7 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
         }
     }
     SKAction * anim = [SKAction moveBy:CGVectorMake(dy, dy) duration:duration];
-    [animations addObject:anim];
+    [actions addObject:anim];
     
     //clean everything up
     deleteExpression(x);
@@ -177,7 +222,7 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
     deleteExpression(d);
     
     //return the next index
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -190,11 +235,11 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
  @param env The environment that this was called in
  @param args The environment of the innermost lambda function or NULL
  */
-expression * sequenceAnim(expression * arglist, environment * env, environment * args){
+expression * sequenceAction(expression * arglist, environment * env, environment * args){
     expression * x;
     slist * list = arglist->data.list;
     snode * iter;
-    int animation = 0;
+    int action = 0;
     //where we'll shove things
     NSMutableArray * array;
     //create with enough space
@@ -204,18 +249,18 @@ expression * sequenceAnim(expression * arglist, environment * env, environment *
         //evaluate the next argument
         x = evalAST((expression *)(iter->elem), env, args);
         if(x != NULL && x->type == CONST_EXP){
-            animation = x->data.num;
+            action = x->data.num;
         }
-        [array addObject:[animations objectAtIndex:animation]];
+        [array addObject:[actions objectAtIndex:action]];
         //clean up as we created this via eval ast
         deleteExpression(x);
     }
     
-    SKAction * anim = [SKAction sequence:array];
-    [animations addObject:anim];
+    SKAction * actn = [SKAction sequence:array];
+    [actions addObject:actn];
     
     //return index
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -229,11 +274,11 @@ expression * sequenceAnim(expression * arglist, environment * env, environment *
  @param env The environment that this was called in
  @param args The environment of the innermost lambda function or NULL
  */
-expression * groupAnim(expression * arglist, environment * env, environment * args){
+expression * groupAction(expression * arglist, environment * env, environment * args){
     expression * x;
     slist * list = arglist->data.list, *evaled;
     snode * iter;
-    int animation = 0;
+    int action = 0;
     NSMutableArray * array;
     //evaluate the whole arguments list.
     //note: we'll have to delete all the elems in this
@@ -242,20 +287,20 @@ expression * groupAnim(expression * arglist, environment * env, environment * ar
     for(iter = evaled->head; iter != NULL; iter = iter->next){
         x = (expression *)(iter->elem);
         if(x != NULL && x->type == CONST_EXP){
-            animation = x->data.num;
+            action = x->data.num;
         }
-        [array addObject:[animations objectAtIndex:animation]];
+        [array addObject:[actions objectAtIndex:action]];
         //delete it as we created via an eval
         deleteExpression(x);
     }
     
-    SKAction * anim = [SKAction group:array];
-    [animations addObject:anim];
+    SKAction * actn = [SKAction group:array];
+    [actions addObject:actn];
     //free the list
     freeList(evaled);
     
     //return index
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -293,10 +338,10 @@ expression * scaleAnim(expression * arglist, environment * env, environment * ar
         }
     }
     SKAction * anim = [SKAction scaleBy:dx duration:duration];
-    [animations addObject:anim];
+    [actions addObject:anim];
     deleteExpression(x);
     deleteExpression(d);
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -311,7 +356,7 @@ expression * scaleAnim(expression * arglist, environment * env, environment * ar
  @param env The environment that this was called in
  @param args The environment of the innermost lambda function or NULL
  */
-expression * repeatAnim(expression * arglist, environment * env, environment * args){
+expression * repeatAction(expression * arglist, environment * env, environment * args){
     expression * act, *times;
     slist * list = arglist->data.list;
     snode * iter = list->head;
@@ -333,17 +378,17 @@ expression * repeatAnim(expression * arglist, environment * env, environment * a
             time = -1;
         }
     }
-    SKAction * anim, *source = [animations objectAtIndex:action];
+    SKAction * actn, *source = [actions objectAtIndex:action];
     if(time == -1){
         NSLog(@"forever");
-        anim = [SKAction repeatActionForever:source];
+        actn = [SKAction repeatActionForever:source];
     }else{
-        anim = [SKAction repeatAction:source count:time];
+        actn = [SKAction repeatAction:source count:time];
     }
-    [animations addObject:anim];
+    [actions addObject:actn];
     deleteExpression(act);
     deleteExpression(times);
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -356,18 +401,18 @@ expression * repeatAnim(expression * arglist, environment * env, environment * a
  @param env The environment that this was called in
  @param args The environment of the innermost lambda function or NULL
  */
-expression * runAnim(expression * arglist, environment * env, environment * args){
-    expression * anim, *node;
+expression * runAction(expression * arglist, environment * env, environment * args){
+    expression * act, *node;
     slist * list = arglist->data.list;
     snode * iter = list->head;
     int nindex = 0, aindex = 0;
     if(list->len != 2)
         return NULL;
-    anim = evalAST((expression *)(iter->elem), env, args);
+    act = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     node = evalAST((expression *)(iter->elem), env, args);
-    if(anim != NULL && anim->type == CONST_EXP){
-        aindex = anim->data.num;
+    if(act != NULL && act->type == CONST_EXP){
+        aindex = act->data.num;
         if(aindex < 0){
             aindex = 0;
         }
@@ -378,10 +423,10 @@ expression * runAnim(expression * arglist, environment * env, environment * args
             nindex = 0;
         }
     }
-    SKAction * a = [animations objectAtIndex:aindex];
+    SKAction * a = [actions objectAtIndex:aindex];
     SKNode * n = [sprites objectAtIndex:nindex];
     [n runAction:a];
-    deleteExpression(anim);
+    deleteExpression(act);
     deleteExpression(node);
     return NULL;
 }
@@ -421,10 +466,10 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
         }
     }
     SKAction * anim = [SKAction rotateByAngle:dx duration:duration];
-    [animations addObject:anim];
+    [actions addObject:anim];
     deleteExpression(x);
     deleteExpression(d);
-    return makeInt(nextAnimInd++);
+    return makeInt(nextActionInd++);
 }
 
 /**
@@ -571,17 +616,18 @@ void runSniffleString(const char * data, std::size_t len){
     environment * ENV = createEnv();
     (*ENV)["SpriteAlloc"] = makeCFunc(&allocateSpriteList);
     (*ENV)["TextureAlloc"] = makeCFunc(&allocateTextureList);
-    (*ENV)["AnimationAlloc"] = makeCFunc(&allocateAnimationList);
+    (*ENV)["ActionAlloc"] = makeCFunc(&allocateActionsList);
     (*ENV)["Sprite"] = makeCFunc(&spriteWithSizeAndImage);
     (*ENV)["Texture"] = makeCFunc(&textureFromImage);
 
-    (*ENV)["sequence"] = makeCFunc(&sequenceAnim);
-    (*ENV)["group"] = makeCFunc(&groupAnim);
+    (*ENV)["sound"] = makeCFunc(&makeSound);
+    (*ENV)["sequence"] = makeCFunc(&sequenceAction);
+    (*ENV)["group"] = makeCFunc(&groupAction);
     (*ENV)["moveBy"] = makeCFunc(&moveByAnim);
     (*ENV)["scale"] = makeCFunc(&scaleAnim);
     (*ENV)["rotate"] = makeCFunc(&rotateAnim);
-    (*ENV)["repeat"] = makeCFunc(&repeatAnim);
-    (*ENV)["run"] = makeCFunc(&runAnim);
+    (*ENV)["repeat"] = makeCFunc(&repeatAction);
+    (*ENV)["run"] = makeCFunc(&runAction);
     
     (*ENV)["addChild"] = makeCFunc(&putOnScreenAtPoint);
 
@@ -598,7 +644,7 @@ badly named function that's running some basic sniffle for the current demo.
  */
 + (void) addSprite:(SKScene *)scene{
     globalScene = scene;
-    [ObjcShell runProgram:@"(SpriteAlloc 10) (TextureAlloc 10) (AnimationAlloc 10) (set anim1 (repeat (sequence (moveBy 50 -70 1000) (scale 1100 500) (rotate 360 500)) 5)) (set anim2 (repeat (group (moveBy 50 -70 1000) (scale 750 500) (rotate 360 500)) 10)) (set lowcat (Texture \"lowpolycat.png\")) (set sprite1 (Sprite 100 100 lowcat)) (set sprite2 (Sprite 200 300 lowcat)) (addChild sprite2 100 0)(addChild sprite1 -100 200) (run anim1 sprite1) (run anim2 sprite2)"];
+    [ObjcShell runProgram:@"(SpriteAlloc 10) (TextureAlloc 10) (ActionAlloc 10) (set anim1 (repeat (sequence (moveBy 50 -70 1000) (scale 1100 500) (rotate 360 500)) 5)) (set anim2 (repeat (group (moveBy 50 -70 1000) (scale 750 500) (rotate 360 500)) 10)) (set lowcat (Texture \"lowpolycat.png\")) (set sprite1 (Sprite 100 100 lowcat)) (set sprite2 (Sprite 200 300 lowcat)) (addChild sprite2 100 0)(addChild sprite1 -100 200) (run anim1 sprite1) (run anim2 sprite2)"];
     /*SKSpriteNode * sprite = [[SKSpriteNode alloc] initWithTexture:NULL color:[UIColor redColor] size:CGSizeMake(100, 100)];
     [sprite setPosition:CGPointMake(10, 10)];
     [scene addChild:sprite];*/

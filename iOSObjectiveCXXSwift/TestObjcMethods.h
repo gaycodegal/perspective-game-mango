@@ -13,11 +13,11 @@
 
 
 static NSMutableArray * sprites = nil;
-static NSMutableArray * animations = nil;
+static NSMutableArray * actions = nil;
 static SKScene * globalScene = nil;
 static int nextSpriteInd = 0;
 static int nextTexInd = 0;
-static int nextAnimInd = 0;
+static int nextActionInd = 0;
 static NSMutableArray * textures = nil;
 
 @interface ObjcShell : NSObject
