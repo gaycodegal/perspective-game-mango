@@ -15,15 +15,30 @@ void dangerWillRobinson(int x){
     [ObjcShell callBack:x];
 }
 
+/**
+ allocates room for x many sprites
+ Sniffle arg[0] (SIZE): how many sprites should we allocated space for
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * allocateSpriteList(expression * arglist, environment * env, environment * args){
     expression * temp;
+    //retreive underlying list struct
     slist * list = arglist->data.list;
     int size = 0;
+    //check that we have the right number of args
     if(list->len != 1)
+        // NULL is a valid sniffle exp and usually what we return in error
         return NULL;
+    // evaluate the first thing in the list
     temp = evalAST((expression *)(list->head->elem), env, args);
-    if(temp->type == CONST_EXP){
-        size = temp->data.num;
+    //check that we have the right type (types are found in lispinclude.h)
+    //type definitions in datastructures & expressions
+    //also make sure non null as null is a valid sniffle exp
+    if(temp != NULL && temp->type == CONST_EXP){
+        size = temp->data.num; // get the size
         if(size > 0){
             sprites = nil;
             sprites = [NSMutableArray arrayWithCapacity:size];
@@ -34,10 +49,22 @@ expression * allocateSpriteList(expression * arglist, environment * env, environ
         nextSpriteInd = 0;
     }
     
+    //always have to delete the expressions we create and don't return.
+    //we must delete nothing else, but must delete our temporary values.
     deleteExpression(temp);
     return NULL;
 }
 
+/**
+ allocates room for x many textures
+ 
+ see allocateSpriteList for more details
+ Sniffle arg[0] (SIZE): how many sprites should we allocated space for
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * allocateTextureList(expression * arglist, environment * env, environment * args){
     expression * temp;
     slist * list = arglist->data.list;
@@ -45,7 +72,7 @@ expression * allocateTextureList(expression * arglist, environment * env, enviro
     if(list->len != 1)
         return NULL;
     temp = evalAST((expression *)(list->head->elem), env, args);
-    if(temp->type == CONST_EXP){
+    if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num;
         if(size > 0){
             textures = nil;
@@ -57,10 +84,21 @@ expression * allocateTextureList(expression * arglist, environment * env, enviro
         nextTexInd = 0;
     }
     
+    //cleanup
     deleteExpression(temp);
     return NULL;
 }
 
+/**
+ allocates room for x many animations
+ 
+ see allocateSpriteList for more details
+ Sniffle arg[0] (SIZE): how many sprites should we allocated space for
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * allocateAnimationList(expression * arglist, environment * env, environment * args){
     expression * temp;
     slist * list = arglist->data.list;
@@ -68,7 +106,7 @@ expression * allocateAnimationList(expression * arglist, environment * env, envi
     if(list->len != 1)
         return NULL;
     temp = evalAST((expression *)(list->head->elem), env, args);
-    if(temp->type == CONST_EXP){
+    if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num;
         if(size > 0){
             animations = nil;
@@ -80,11 +118,24 @@ expression * allocateAnimationList(expression * arglist, environment * env, envi
         nextAnimInd = 0;
     }
 
+    //cleanup
     deleteExpression(temp);
     return NULL;
 }
 
-
+/**
+ create a move by skaction as an animation
+ 
+ Sniffle:
+ arg[0] (dx): delta x position to move by
+ arg[1] (dy): delta y position to move by
+ arg[2] (duration in ms): duration of action in milliseconds
+ return: index of animation in animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * moveByAnim(expression * arglist, environment * env, environment * args){
     expression * x, *y, *d;
     slist * list = arglist->data.list;
@@ -93,60 +144,99 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
     if(list->len != 3){
         return NULL;
     }
+    //eval x
     x = evalAST((expression *)(iter->elem), env, args);
+    //move along to next element in arguments
     iter = iter->next;
+    //eval y
     y = evalAST((expression *)(iter->elem), env, args);
+    //yada yada
     iter = iter->next;
     d = evalAST((expression *)(iter->elem), env, args);
-    if(x->type == CONST_EXP){
+    //set the values, casting to float from ints
+    if(x != NULL && x->type == CONST_EXP){
         dx = (float)x->data.num;
     }
-    if(y->type == CONST_EXP){
+    if(y != NULL && y->type == CONST_EXP){
         dy = (float)y->data.num;
     }
-    if(d->type == CONST_EXP){
+    //duration is in ms
+    if(d != NULL && d->type == CONST_EXP){
         duration = (float)(d->data.num)/1000.0f;
+        //duration is non negative
         if(duration < 0){
             duration = 0;
         }
     }
     SKAction * anim = [SKAction moveBy:CGVectorMake(dy, dy) duration:duration];
     [animations addObject:anim];
+    
+    //clean everything up
     deleteExpression(x);
     deleteExpression(y);
     deleteExpression(d);
+    
+    //return the next index
     return makeInt(nextAnimInd++);
 }
 
+/**
+ create a sequence skaction as an animation
+ 
+ Sniffle (var arg func):
+ arg[i]: ith animation to run as a number representing the index in the animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * sequenceAnim(expression * arglist, environment * env, environment * args){
     expression * x;
     slist * list = arglist->data.list;
     snode * iter;
     int animation = 0;
+    //where we'll shove things
     NSMutableArray * array;
-    //evaled = evalList(list, env, args);
+    //create with enough space
     array = [NSMutableArray arrayWithCapacity:list->len];
-    int count = 0;
+    //loop over a slist pattern
     for(iter = list->head; iter != NULL; iter = iter->next){
+        //evaluate the next argument
         x = evalAST((expression *)(iter->elem), env, args);
         if(x != NULL && x->type == CONST_EXP){
             animation = x->data.num;
         }
         [array addObject:[animations objectAtIndex:animation]];
+        //clean up as we created this via eval ast
         deleteExpression(x);
     }
     
     SKAction * anim = [SKAction sequence:array];
     [animations addObject:anim];
+    
+    //return index
     return makeInt(nextAnimInd++);
 }
 
+/**
+ create a group skaction as an animation, will run all animations in parallel
+ exactly like sequence only all args evaluated at once rather than as we need them
+ 
+ Sniffle (var arg func):
+ arg[i]: ith animation to run as a number representing the index in the animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * groupAnim(expression * arglist, environment * env, environment * args){
     expression * x;
     slist * list = arglist->data.list, *evaled;
     snode * iter;
     int animation = 0;
     NSMutableArray * array;
+    //evaluate the whole arguments list.
+    //note: we'll have to delete all the elems in this
     evaled = evalList(list, env, args);
     array = [NSMutableArray arrayWithCapacity:evaled->len];
     for(iter = evaled->head; iter != NULL; iter = iter->next){
@@ -155,15 +245,31 @@ expression * groupAnim(expression * arglist, environment * env, environment * ar
             animation = x->data.num;
         }
         [array addObject:[animations objectAtIndex:animation]];
+        //delete it as we created via an eval
         deleteExpression(x);
     }
     
     SKAction * anim = [SKAction group:array];
     [animations addObject:anim];
+    //free the list
     freeList(evaled);
+    
+    //return index
     return makeInt(nextAnimInd++);
 }
 
+/**
+ create a move by skaction as an animation
+ 
+ Sniffle:
+ arg[0] (deltaSize): amount to scale by in thousandths (e.g. deltaSize = 1 means 1/1000 relative size)
+ arg[1] (duration in ms): duration of action in milliseconds
+ return: index of animation in animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * scaleAnim(expression * arglist, environment * env, environment * args){
     expression * x, *d;
     slist * list = arglist->data.list;
@@ -174,13 +280,13 @@ expression * scaleAnim(expression * arglist, environment * env, environment * ar
     x = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     d = evalAST((expression *)(iter->elem), env, args);
-    if(x->type == CONST_EXP){
+    if(x != NULL && x->type == CONST_EXP){
         dx = (float)(x->data.num)/1000.0f;
         if(dx < 0){
             dx = 0;
         }
     }
-    if(d->type == CONST_EXP){
+    if(d != NULL && d->type == CONST_EXP){
         duration = (float)(d->data.num)/1000.0f;
         if(duration < 0){
             duration = 0;
@@ -193,6 +299,18 @@ expression * scaleAnim(expression * arglist, environment * env, environment * ar
     return makeInt(nextAnimInd++);
 }
 
+/**
+ create a repeated animation
+ 
+ Sniffle:
+ arg[0] (animation): the animation index to repeat
+ arg[1] (count): the number of times to repeat. -1 is infinity
+ return: index of animation in animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * repeatAnim(expression * arglist, environment * env, environment * args){
     expression * act, *times;
     slist * list = arglist->data.list;
@@ -203,13 +321,13 @@ expression * repeatAnim(expression * arglist, environment * env, environment * a
     act = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     times = evalAST((expression *)(iter->elem), env, args);
-    if(act->type == CONST_EXP){
+    if(act != NULL && act->type == CONST_EXP){
         action = act->data.num;
         if(action < 0){
             action = 0;
         }
     }
-    if(times->type == CONST_EXP){
+    if(times != NULL && times->type == CONST_EXP){
         time = times->data.num;
         if(time < 0){
             time = -1;
@@ -228,6 +346,16 @@ expression * repeatAnim(expression * arglist, environment * env, environment * a
     return makeInt(nextAnimInd++);
 }
 
+/**
+ run animation by index
+ 
+ Sniffle:
+ arg[0] (animation): the animation index to run
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * runAnim(expression * arglist, environment * env, environment * args){
     expression * anim, *node;
     slist * list = arglist->data.list;
@@ -238,13 +366,13 @@ expression * runAnim(expression * arglist, environment * env, environment * args
     anim = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     node = evalAST((expression *)(iter->elem), env, args);
-    if(anim->type == CONST_EXP){
+    if(anim != NULL && anim->type == CONST_EXP){
         aindex = anim->data.num;
         if(aindex < 0){
             aindex = 0;
         }
     }
-    if(node->type == CONST_EXP){
+    if(node != NULL && node->type == CONST_EXP){
         nindex = node->data.num;
         if(nindex < 0){
             nindex = 0;
@@ -258,6 +386,18 @@ expression * runAnim(expression * arglist, environment * env, environment * args
     return NULL;
 }
 
+/**
+ create a rotate by angle skaction as an animation
+ 
+ Sniffle:
+ arg[0] (deltaSize): amount to scale by in degrees (e.g. deltaSize = 360 means 2*PI)
+ arg[1] (duration in ms): duration of action in milliseconds
+ return: index of animation in animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * rotateAnim(expression * arglist, environment * env, environment * args){
     expression * x, *d;
     slist * list = arglist->data.list;
@@ -268,13 +408,13 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
     x = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     d = evalAST((expression *)(iter->elem), env, args);
-    if(x->type == CONST_EXP){
+    if(x != NULL && x->type == CONST_EXP){
         dx = (float)(x->data.num)/180.0f*3.141592654f;
         if(dx < 0){
             dx = 0;
         }
     }
-    if(d->type == CONST_EXP){
+    if(d != NULL && d->type == CONST_EXP){
         duration = (float)(d->data.num)/1000.0f;
         if(duration < 0){
             duration = 0;
@@ -287,6 +427,19 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
     return makeInt(nextAnimInd++);
 }
 
+/**
+ create a sprite with a size and an image
+ 
+ Sniffle:
+ arg[0] (width): width of the sprite
+ arg[1] (height): height of the sprite
+ arg[2] (image): index of the image (texture)
+ return: index of sprite in sprites list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * spriteWithSizeAndImage(expression * arglist, environment * env, environment * args){
     expression * w, *h, *image;
     slist * list = arglist->data.list;
@@ -300,19 +453,19 @@ expression * spriteWithSizeAndImage(expression * arglist, environment * env, env
     h = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     image = evalAST((expression *)(iter->elem), env, args);
-    if(w->type == CONST_EXP){
+    if(w != NULL && w->type == CONST_EXP){
         width = (float)w->data.num;
         if(width < 0){
             width = 0;
         }
     }
-    if(h->type == CONST_EXP){
+    if(h != NULL && h->type == CONST_EXP){
         height = (float)h->data.num;
         if(height < 0){
             height = 0;
         }
     }
-    if(image->type == CONST_EXP){
+    if(image != NULL && image->type == CONST_EXP){
         img = image->data.num;
         if(img < 0){
             img = 0;
@@ -327,6 +480,18 @@ expression * spriteWithSizeAndImage(expression * arglist, environment * env, env
     return makeInt(nextSpriteInd++);
 }
 
+
+/**
+ create a texture from a source file
+ 
+ Sniffle:
+ arg[0] (imageName): the name of the image in the bundle
+ return: index of texture in textures list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * textureFromImage(expression * arglist, environment * env, environment * args){
     expression *image;
     slist * list = arglist->data.list;
@@ -335,7 +500,7 @@ expression * textureFromImage(expression * arglist, environment * env, environme
     if(list->len != 1)
         return NULL;
     image = evalAST((expression *)(iter->elem), env, args);
-    if(image->type == STR_EXP){
+    if(image != NULL && image->type == STR_EXP){
         loc = image->data.str->s->c_str();
     }
     SKTexture * tex = NULL;
@@ -348,6 +513,19 @@ expression * textureFromImage(expression * arglist, environment * env, environme
     return makeInt(nextTexInd++);
 }
 
+/**
+ put an actor/sprite (skspritenode) on screen at a certain point
+ 
+ Sniffle:
+ arg[0] (sprite): the index of the sprite to put somewhere
+ arg[1] (x): the x coordinate to put the image at
+ arg[2] (y): the y coordinate to put the image at
+ return: index of texture in textures list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
 expression * putOnScreenAtPoint(expression * arglist, environment * env, environment * args){
     expression * sprite, *x, *y;
     slist * list = arglist->data.list;
@@ -361,16 +539,16 @@ expression * putOnScreenAtPoint(expression * arglist, environment * env, environ
     x = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     y = evalAST((expression *)(iter->elem), env, args);
-    if(sprite->type == CONST_EXP){
+    if(sprite != NULL && sprite->type == CONST_EXP){
         index = sprite->data.num;
         if(index < 0){
             index = 0;
         }
     }
-    if(x->type == CONST_EXP){
+    if(x != NULL && x->type == CONST_EXP){
         xp = (float)x->data.num;
     }
-    if(y->type == CONST_EXP){
+    if(y != NULL && y->type == CONST_EXP){
         yp = (float)y->data.num;
     }
     SKSpriteNode * spr = [sprites objectAtIndex:index];
@@ -383,6 +561,12 @@ expression * putOnScreenAtPoint(expression * arglist, environment * env, environ
     return NULL;
 }
 
+/**
+ runs a sniffle string with our added objective c functions
+ 
+ @param data The raw ascii source code to run
+ @param len The length of data
+ */
 void runSniffleString(const char * data, std::size_t len){
     environment * ENV = createEnv();
     (*ENV)["SpriteAlloc"] = makeCFunc(&allocateSpriteList);
@@ -409,6 +593,9 @@ void runSniffleString(const char * data, std::size_t len){
 
 @implementation ObjcShell
 
+/**
+badly named function that's running some basic sniffle for the current demo.
+ */
 + (void) addSprite:(SKScene *)scene{
     globalScene = scene;
     [ObjcShell runProgram:@"(SpriteAlloc 10) (TextureAlloc 10) (AnimationAlloc 10) (set anim1 (repeat (sequence (moveBy 50 -70 1000) (scale 1100 500) (rotate 360 500)) 5)) (set anim2 (repeat (group (moveBy 50 -70 1000) (scale 750 500) (rotate 360 500)) 10)) (set lowcat (Texture \"lowpolycat.png\")) (set sprite1 (Sprite 100 100 lowcat)) (set sprite2 (Sprite 200 300 lowcat)) (addChild sprite2 100 0)(addChild sprite1 -100 200) (run anim1 sprite1) (run anim2 sprite2)"];
@@ -418,10 +605,14 @@ void runSniffleString(const char * data, std::size_t len){
 
 }
 
+/**
+ run a sniffle program stored in an NSString
+ */
 + (void) runProgram:(NSString *) program{
     runSniffleString([program cStringUsingEncoding:NSASCIIStringEncoding], [program length]);
 }
 
+//test function
 + (void) callWithInt:(int)x{
     printf("WHOA %i\n",x);
     dangerWillRobinson(x);
@@ -429,6 +620,7 @@ void runSniffleString(const char * data, std::size_t len){
 
 }
 
+//test function
 + (void) callBack:(int)x{
     printf("Double WHOA %i\n",x);
 }
