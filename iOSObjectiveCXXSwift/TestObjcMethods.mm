@@ -644,7 +644,7 @@ badly named function that's running some basic sniffle for the current demo.
  */
 + (void) addSprite:(SKScene *)scene{
     globalScene = scene;
-    [ObjcShell runProgram:@"(SpriteAlloc 10) (TextureAlloc 10) (ActionAlloc 10) (set anim1 (repeat (sequence (moveBy 50 -70 1000) (scale 1100 500) (rotate 360 500)) 5)) (set anim2 (repeat (group (moveBy 50 -70 1000) (scale 750 500) (rotate 360 500)) 10)) (set lowcat (Texture \"lowpolycat.png\")) (set sprite1 (Sprite 100 100 lowcat)) (set sprite2 (Sprite 200 300 lowcat)) (addChild sprite2 100 0)(addChild sprite1 -100 200) (run anim1 sprite1) (run anim2 sprite2)"];
+    [ObjcShell runProgram:@"(SpriteAlloc 10) (TextureAlloc 10) (ActionAlloc 11) (set mysound (sound \"GymnopedieNo1KevinMacleod.mp3\" 1)) (set anim1 (repeat (sequence (moveBy 50 -70 1000) (scale 1100 500) (rotate 360 500)) 5)) (set anim2 (repeat (group (moveBy 50 -70 1000) (scale 750 500) (rotate 360 500)) 10)) (set lowcat (Texture \"lowpolycat.png\")) (set sprite1 (Sprite 100 100 lowcat)) (set sprite2 (Sprite 200 300 lowcat)) (addChild sprite2 100 0)(addChild sprite1 -100 200) (run anim1 sprite1) (run mysound sprite2) (run anim2 sprite2)"];
     /*SKSpriteNode * sprite = [[SKSpriteNode alloc] initWithTexture:NULL color:[UIColor redColor] size:CGSizeMake(100, 100)];
     [sprite setPosition:CGPointMake(10, 10)];
     [scene addChild:sprite];*/
