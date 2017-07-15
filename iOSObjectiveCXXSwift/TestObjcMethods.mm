@@ -153,6 +153,18 @@ expression * allocateActionsList(expression * arglist, environment * env, enviro
     temp = evalAST((expression *)(list->head->elem), env, args);
     if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num;
+        if(actions != nil){
+            SKAction * action;
+            for(int i = (int)[actions count] - 1; i >= 0; --i){
+                action = [actions objectAtIndex:i];
+                if(action != nil){
+                    id keyed = [action valueForKey:@"deleteMe"];
+                    if(keyed != nil){
+                        ((void (^)())keyed)();
+                    }
+                }
+            }
+        }
         if(size > 0){
             actions = nil;
             actions = [NSMutableArray arrayWithCapacity:size];
@@ -473,6 +485,39 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
 }
 
 /**
+ create a callback to run on animation completion
+ 
+ Sniffle:
+ arg[0] (callback): lambda function to call on event completion
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
+expression * eventAnim(expression * arglist, environment * env, environment * args){
+    __block expression * x;
+    slist * list = arglist->data.list;
+    snode * iter = list->head;
+    if(list->len != 1)
+        return NULL;
+    x = evalAST((expression *)(iter->elem), env, args);
+    if(!(x != NULL && x->type == FUNC_EXP)){
+        deleteExpression(x);
+        return NULL;
+    }
+    SKAction * anim = [SKAction runBlock:^{
+        expression * list = makeList(makeSList());
+        deleteExpression(x->data.func->exec(list, env));
+        deleteExpression(list);
+    }];
+    [anim setValue:(id)(^{
+        deleteExpression(x);
+    }) forKey:@"deleteMe"];
+    [actions addObject:anim];
+    return makeInt(nextActionInd++);
+}
+
+/**
  create a sprite with a size and an image
  
  Sniffle:
@@ -629,6 +674,8 @@ void runSniffleString(const char * data, std::size_t len){
     (*ENV)["repeat"] = makeCFunc(&repeatAction);
     (*ENV)["run"] = makeCFunc(&runAction);
     
+    (*ENV)["event"] = makeCFunc(&eventAnim);
+    
     (*ENV)["addChild"] = makeCFunc(&putOnScreenAtPoint);
 
     expression * prog = parseList((char*)data, len);
@@ -637,7 +684,9 @@ void runSniffleString(const char * data, std::size_t len){
     deleteEnv(ENV);
 }
 
+
 @implementation ObjcShell
+
 
 /**
 badly named function that's running some basic sniffle for the current demo.
