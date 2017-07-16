@@ -488,7 +488,7 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
  create a callback to run on animation completion
  
  Sniffle:
- arg[0] (callback): lambda function to call on event completion
+ arg[0] (callback): some piece of code to run later.
  
  @param arglist The list of arguments passed into the Sniffle invocation of this function
  @param env The environment that this was called in
@@ -500,15 +500,9 @@ expression * eventAnim(expression * arglist, environment * env, environment * ar
     snode * iter = list->head;
     if(list->len != 1)
         return NULL;
-    x = evalAST((expression *)(iter->elem), env, args);
-    if(!(x != NULL && x->type == FUNC_EXP)){
-        deleteExpression(x);
-        return NULL;
-    }
+    x = copyExpression((expression *)(iter->elem));
     SKAction * anim = [SKAction runBlock:^{
-        expression * list = makeList(makeSList());
-        deleteExpression(x->data.func->exec(list, env));
-        deleteExpression(list);
+        deleteExpression(evalAST(x, env, args));
     }];
     [anim setValue:(id)(^{
         deleteExpression(x);
@@ -658,13 +652,21 @@ expression * putOnScreenAtPoint(expression * arglist, environment * env, environ
  @param len The length of data
  */
 void runSniffleString(const char * data, std::size_t len){
+    environment * ENV = (environment *)createMangoEnvironment();
+    expression * prog = parseList((char*)data, len);
+    runProgram(prog, ENV);
+    deleteExpression(prog);
+    deleteEnv(ENV);
+}
+
+void * createMangoEnvironment(){
     environment * ENV = createEnv();
     (*ENV)["SpriteAlloc"] = makeCFunc(&allocateSpriteList);
     (*ENV)["TextureAlloc"] = makeCFunc(&allocateTextureList);
     (*ENV)["ActionAlloc"] = makeCFunc(&allocateActionsList);
     (*ENV)["Sprite"] = makeCFunc(&spriteWithSizeAndImage);
     (*ENV)["Texture"] = makeCFunc(&textureFromImage);
-
+    
     (*ENV)["sound"] = makeCFunc(&makeSound);
     (*ENV)["sequence"] = makeCFunc(&sequenceAction);
     (*ENV)["group"] = makeCFunc(&groupAction);
@@ -677,11 +679,7 @@ void runSniffleString(const char * data, std::size_t len){
     (*ENV)["event"] = makeCFunc(&eventAnim);
     
     (*ENV)["addChild"] = makeCFunc(&putOnScreenAtPoint);
-
-    expression * prog = parseList((char*)data, len);
-    runProgram(prog, ENV);
-    deleteExpression(prog);
-    deleteEnv(ENV);
+    return (void *)ENV;
 }
 
 

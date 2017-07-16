@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181620651F19B71600F1A1B4 /* MangoScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 181620641F19B71600F1A1B4 /* MangoScene.mm */; };
 		1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1854580D1EEC9141001BF5BB /* lowpolycat.png */; };
 		1864A64B1EFC9BF500D51311 /* expressions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6441EFC9BF500D51311 /* expressions.cpp */; };
 		1864A64C1EFC9BF500D51311 /* filereader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6451EFC9BF500D51311 /* filereader.cpp */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181620631F19B71600F1A1B4 /* MangoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangoScene.h; sourceTree = "<group>"; };
+		181620641F19B71600F1A1B4 /* MangoScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MangoScene.mm; sourceTree = "<group>"; };
 		1854580D1EEC9141001BF5BB /* lowpolycat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowpolycat.png; sourceTree = "<group>"; };
 		1864A6441EFC9BF500D51311 /* expressions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expressions.cpp; sourceTree = "<group>"; };
 		1864A6451EFC9BF500D51311 /* filereader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filereader.cpp; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */,
 				1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */,
 				1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */,
+				181620631F19B71600F1A1B4 /* MangoScene.h */,
+				181620641F19B71600F1A1B4 /* MangoScene.mm */,
 				1885FCEF1EEB2B22009F6579 /* AppDelegate.swift */,
 				1885FCF11EEB2B22009F6579 /* GameScene.sks */,
 				1885FCF31EEB2B22009F6579 /* Actions.sks */,
@@ -318,6 +323,7 @@
 				1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */,
 				1864A64D1EFC9BF500D51311 /* interp.cpp in Sources */,
 				1864A64B1EFC9BF500D51311 /* expressions.cpp in Sources */,
+				181620651F19B71600F1A1B4 /* MangoScene.mm in Sources */,
 				1864A64C1EFC9BF500D51311 /* filereader.cpp in Sources */,
 				1864A64E1EFC9BF500D51311 /* lambdafunc.cpp in Sources */,
 				1864A64F1EFC9BF500D51311 /* parse.cpp in Sources */,

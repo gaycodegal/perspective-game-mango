@@ -10,7 +10,7 @@
 
 #ifndef TestObjcMethods_h
 #define TestObjcMethods_h
-
+void * createMangoEnvironment();
 
 static NSMutableArray * sprites = nil;
 static NSMutableArray * actions = nil;
