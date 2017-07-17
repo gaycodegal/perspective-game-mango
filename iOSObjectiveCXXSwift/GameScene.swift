@@ -50,7 +50,7 @@ class GameScene: SKScene {
         }
         
         globalScene = self;
-        ObjcShell.addSprite(self);
+        ObjcShell.setScene(self);
         self.addChild(spaceship!)
     }
     

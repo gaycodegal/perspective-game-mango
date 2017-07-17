@@ -41,7 +41,7 @@ typedef void (^IntToVoid)(UIControlEvents);
 + (void) callWithInt:(int)x;
 + (MangoScene *) getMainScene;
 + (void) callBack:(int)x;
-+ (void) addSprite:(SKScene *)scene;
++ (void) setScene:(SKScene *)scene;
 
 + (void) loadSceneWithName:(NSString *)name;
 + (void) runString:(NSString *)program;
