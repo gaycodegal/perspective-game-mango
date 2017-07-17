@@ -15,17 +15,28 @@ void * createMangoEnvironment();
 
 static NSMutableArray * sprites = nil;
 static NSMutableArray * actions = nil;
+static NSMutableArray * buttons = nil;
 static SKScene * globalScene = nil;
+static int nextButtonInd = 0;
 static int nextSpriteInd = 0;
 static int nextTexInd = 0;
 static int nextActionInd = 0;
 static NSMutableArray * textures = nil;
+typedef void (^IntToVoid)(UIControlEvents);
+@interface MangoUIButton : UIButton {
+    IntToVoid _actionBlock;
+    IntToVoid _deleteBlock;
+}
+-(void)setBlocks:(IntToVoid)action withDeleteMe:(IntToVoid)deleteMe;
+-(void)bindToEvent:(UIControlEvents)event;
+-(void)callDeleteMe;
+@end
 
 @interface ObjcShell : NSObject
 {
     
 }
-
++(void)setView:(UIView*)view;
 //set
 + (void) callWithInt:(int)x;
 + (MangoScene *) getMainScene;

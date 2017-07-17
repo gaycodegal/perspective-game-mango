@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        ObjcShell.setView(self.view);
         ObjcShell.loadScene(withName: "test_scene02");
     }
 

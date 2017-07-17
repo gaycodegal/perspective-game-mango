@@ -10,6 +10,37 @@
 #include <iostream>
 #include "interpreter/headers/interp.h"
 #import "MangoScene.h"
+
+
+@implementation MangoUIButton
+
+-(void)setBlocks:(IntToVoid)action withDeleteMe:(IntToVoid)deleteMe{
+    _actionBlock = action;
+    _deleteBlock = deleteMe;
+}
+
+-(void)callDeleteMe{
+    _deleteBlock(UIControlEventTouchUpInside);
+}
+
+-(void)bindToEvent:(UIControlEvents)event {
+    switch (event) {
+        case UIControlEventTouchUpInside:
+            [self addTarget:self action:@selector(didTouchUpInside:) forControlEvents:event];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+-(void) didTouchUpInside:(id)sender{
+    _actionBlock(UIControlEventTouchUpInside);
+}
+@end
+
+
+UIView * _view;
 MangoScene * MAIN_SCENE = NULL;
 
 void dangerWillRobinson(int x){
@@ -94,6 +125,53 @@ expression * allocateSpriteList(expression * arglist, environment * env, environ
             sprites = [NSMutableArray arrayWithCapacity:0];
         }
         nextSpriteInd = 0;
+    }
+    
+    //always have to delete the expressions we create and don't return.
+    //we must delete nothing else, but must delete our temporary values.
+    deleteExpression(temp);
+    return NULL;
+}
+
+/**
+ allocates room for x many buttons
+ Sniffle arg[0] (SIZE): how many buttons should we allocated space for
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
+expression * allocateButtonList(expression * arglist, environment * env, environment * args){
+    expression * temp;
+    //retreive underlying list struct
+    slist * list = arglist->data.list;
+    int size = 0;
+    //check that we have the right number of args
+    if(list->len != 1)
+        // NULL is a valid sniffle exp and usually what we return in error
+        return NULL;
+    // evaluate the first thing in the list
+    temp = evalAST((expression *)(list->head->elem), env, args);
+    //check that we have the right type (types are found in lispinclude.h)
+    //type definitions in datastructures & expressions
+    //also make sure non null as null is a valid sniffle exp
+    if(temp != NULL && temp->type == CONST_EXP){
+        size = temp->data.num; // get the size
+        if(buttons!=nil){
+            for (int i = 0; i<nextButtonInd; ++i) {
+                MangoUIButton * b = [buttons objectAtIndex:i];
+                [b removeFromSuperview];
+                [b callDeleteMe];
+            }
+        }
+        if(size > 0){
+            buttons = nil;
+            buttons = [NSMutableArray arrayWithCapacity:size];
+        }else{
+            buttons = nil;
+            buttons = [NSMutableArray arrayWithCapacity:0];
+        }
+        nextButtonInd = 0;
     }
     
     //always have to delete the expressions we create and don't return.
@@ -241,6 +319,86 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
     
     //return the next index
     return makeInt(nextActionInd++);
+}
+
+/**
+ create a button
+ 
+ Sniffle:
+ arg[0] (x): x position
+ arg[1] (y): y position
+ arg[2] (w): height
+ arg[3] (h): width
+ arg[4] (n): button title
+ arg[5] (e): event (eval'd when button pressed)
+ return: index of animation in animations list
+ 
+ @param arglist The list of arguments passed into the Sniffle invocation of this function
+ @param env The environment that this was called in
+ @param args The environment of the innermost lambda function or NULL
+ */
+expression * buttonMaker(expression * arglist, environment * env, environment * args){
+    expression * x, *y, *w, *h, *n;
+    __block expression * e;
+    slist * list = arglist->data.list;
+    snode * iter = list->head;
+    float width=0, height=0, xp=0, yp=0;
+    char * name = (char*)"";
+    if(list->len != 6){
+        return NULL;
+    }
+    //eval x
+    x = evalAST((expression *)(iter->elem), env, args);
+    //move along to next element in arguments
+    iter = iter->next;
+    //eval y
+    y = evalAST((expression *)(iter->elem), env, args);
+    //yada yada
+    iter = iter->next;
+    w = evalAST((expression *)(iter->elem), env, args);
+    iter = iter->next;
+    h = evalAST((expression *)(iter->elem), env, args);
+    iter = iter->next;
+    n = evalAST((expression *)(iter->elem), env, args);
+    iter = iter->next;
+    e = copyExpression((expression *)(iter->elem));
+    //set the values, casting to float from ints
+    if(x != NULL && x->type == CONST_EXP){
+        xp = x->data.num;
+    }
+    if(y != NULL && y->type == CONST_EXP){
+        yp = y->data.num;
+    }
+    if(w != NULL && w->type == CONST_EXP){
+        width = w->data.num;
+    }
+    if(h != NULL && h->type == CONST_EXP){
+        height = h->data.num;
+    }
+    if(n != NULL && n->type == STR_EXP){
+        name = (char *)(n->data.str->s->c_str());
+    }
+
+
+    MangoUIButton * button = [[MangoUIButton alloc] initWithFrame:CGRectMake(xp, yp, width, height)];
+    [button setTitle:@(name) forState:UIControlStateNormal];
+    [button setBlocks:^(UIControlEvents) {
+        deleteExpression(evalAST(e, env, args));
+    } withDeleteMe:^(UIControlEvents) {
+        deleteExpression(e);
+    }];
+    [button bindToEvent:UIControlEventTouchUpInside];
+    [buttons addObject:button];
+    [_view addSubview:button ];
+    //clean everything up
+    deleteExpression(x);
+    deleteExpression(y);
+    deleteExpression(w);
+    deleteExpression(h);
+    deleteExpression(n);
+    
+    //return the next index
+    return makeInt(nextButtonInd++);
 }
 
 /**
@@ -670,8 +828,10 @@ void * createMangoEnvironment(){
     (*ENV)["SpriteAlloc"] = makeCFunc(&allocateSpriteList);
     (*ENV)["TextureAlloc"] = makeCFunc(&allocateTextureList);
     (*ENV)["ActionAlloc"] = makeCFunc(&allocateActionsList);
+    (*ENV)["ButtonAlloc"] = makeCFunc(&allocateButtonList);
     (*ENV)["Sprite"] = makeCFunc(&spriteWithSizeAndImage);
     (*ENV)["Texture"] = makeCFunc(&textureFromImage);
+    (*ENV)["Button"] = makeCFunc(&buttonMaker);
     
     (*ENV)["sound"] = makeCFunc(&makeSound);
     (*ENV)["sequence"] = makeCFunc(&sequenceAction);
@@ -725,7 +885,9 @@ badly named function that's running some basic sniffle for the current demo.
 + (void) runProgram:(NSString *) program{
     runSniffleString([program cStringUsingEncoding:NSASCIIStringEncoding], [program length]);
 }
-
++(void)setView:(UIView*)view{
+    _view = view;
+}
 //test function
 + (void) callWithInt:(int)x{
     printf("WHOA %i\n",x);
