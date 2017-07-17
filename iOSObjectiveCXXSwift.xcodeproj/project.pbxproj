@@ -25,6 +25,8 @@
 		1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFC1EEB2B22009F6579 /* Assets.xcassets */; };
 		1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */; };
 		1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */; };
+		18AD896C1F1BFAD900EA2AA0 /* test_scene.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */; };
+		18AD896E1F1BFBBE00EA2AA0 /* test_scene02.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */; };
 		18BDB8FE1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18BDB8FD1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 */; };
 		8DBD6B17571A4126E9607BAF /* Pods_iOSObjectiveCXXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390BF9332DD4071752395765 /* Pods_iOSObjectiveCXXSwift.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +65,8 @@
 		1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSObjectiveCXXSwift-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjcMethods.h; sourceTree = "<group>"; };
 		1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestObjcMethods.mm; sourceTree = "<group>"; };
+		18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_scene.lisp; sourceTree = "<group>"; };
+		18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_scene02.lisp; sourceTree = "<group>"; };
 		18BDB8FD1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GymnopedieNo1KevinMacleod.mp3; path = iOSObjectiveCXXSwift/resources/GymnopedieNo1KevinMacleod.mp3; sourceTree = "<group>"; };
 		390BF9332DD4071752395765 /* Pods_iOSObjectiveCXXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSObjectiveCXXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83EA4E7B4AD334C17BA6280B /* Pods-iOSObjectiveCXXSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSObjectiveCXXSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSObjectiveCXXSwift/Pods-iOSObjectiveCXXSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,11 +162,22 @@
 				1885FCF71EEB2B22009F6579 /* GameViewController.swift */,
 				1885FCF91EEB2B22009F6579 /* Main.storyboard */,
 				1885FCFC1EEB2B22009F6579 /* Assets.xcassets */,
+				18AD896A1F1BFABB00EA2AA0 /* Scenes */,
 				921D853F1EFD6E2E003F5AEC /* sounds */,
 				1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */,
 				1885FD011EEB2B22009F6579 /* Info.plist */,
 			);
 			path = iOSObjectiveCXXSwift;
+			sourceTree = "<group>";
+		};
+		18AD896A1F1BFABB00EA2AA0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */,
+				18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */,
+			);
+			name = Scenes;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		921D853F1EFD6E2E003F5AEC /* sounds */ = {
@@ -257,11 +272,13 @@
 			files = (
 				1885FCFB1EEB2B22009F6579 /* Main.storyboard in Resources */,
 				1885FCF21EEB2B22009F6579 /* GameScene.sks in Resources */,
+				18AD896C1F1BFAD900EA2AA0 /* test_scene.lisp in Resources */,
 				1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */,
 				18BDB8FE1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 in Resources */,
 				1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */,
 				1885FCF41EEB2B22009F6579 /* Actions.sks in Resources */,
 				1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */,
+				18AD896E1F1BFBBE00EA2AA0 /* test_scene02.lisp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

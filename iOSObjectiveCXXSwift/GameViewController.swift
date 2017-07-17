@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        ObjcShell.loadScene(withName: "test_scene02");
     }
 
     override var shouldAutorotate: Bool {

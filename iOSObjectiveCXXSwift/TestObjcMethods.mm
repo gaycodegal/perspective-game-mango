@@ -9,6 +9,8 @@
 #import "TestObjcMethods.h"
 #include <iostream>
 #include "interpreter/headers/interp.h"
+#import "MangoScene.h"
+MangoScene * MAIN_SCENE = NULL;
 
 void dangerWillRobinson(int x){
     std::cout << "hi " << x << std::endl;
@@ -158,9 +160,13 @@ expression * allocateActionsList(expression * arglist, environment * env, enviro
             for(int i = (int)[actions count] - 1; i >= 0; --i){
                 action = [actions objectAtIndex:i];
                 if(action != nil){
-                    id keyed = [action valueForKey:@"deleteMe"];
-                    if(keyed != nil){
-                        ((void (^)())keyed)();
+                    if ([action respondsToSelector:NSSelectorFromString(@"deleteMe")]) {
+                        id keyed = [action valueForKeyPath:@"deleteMe"];
+                        if(keyed != nil){
+                            ((void (^)())keyed)();
+                        }
+                    }else{
+                        NSLog(@"darn");
                     }
                 }
             }
@@ -696,6 +702,21 @@ badly named function that's running some basic sniffle for the current demo.
     [sprite setPosition:CGPointMake(10, 10)];
     [scene addChild:sprite];*/
 
+}
+
++(MangoScene *)getMainScene{
+    if(MAIN_SCENE == NULL)
+        MAIN_SCENE = [[MangoScene alloc] init];
+    return MAIN_SCENE;
+}
++ (void) loadSceneWithName:(NSString *)name{
+    [[ObjcShell getMainScene] loadSceneWithName:name];
+}
++ (void) runString:(NSString *)program{
+    [[ObjcShell getMainScene] runString:program];
+}
++ (void) triggerEvent:(NSString *)event{
+    [[ObjcShell getMainScene] triggerEvent:event];
 }
 
 /**

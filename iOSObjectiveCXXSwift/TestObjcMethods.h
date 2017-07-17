@@ -5,11 +5,12 @@
 //  Created by Steph on 6/9/17.
 //  Copyright © 2017 Steph Oro. All rights reserved.
 //
+#ifndef TestObjcMethods_h
+#define TestObjcMethods_h
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-#ifndef TestObjcMethods_h
-#define TestObjcMethods_h
+@class MangoScene;
 void * createMangoEnvironment();
 
 static NSMutableArray * sprites = nil;
@@ -22,12 +23,19 @@ static NSMutableArray * textures = nil;
 
 @interface ObjcShell : NSObject
 {
+    
 }
 
 //set
 + (void) callWithInt:(int)x;
++ (MangoScene *) getMainScene;
 + (void) callBack:(int)x;
 + (void) addSprite:(SKScene *)scene;
+
++ (void) loadSceneWithName:(NSString *)name;
++ (void) runString:(NSString *)program;
++ (void) triggerEvent:(NSString *)event;
+
 @end
 
 #endif /* TestObjcMethods_h */
