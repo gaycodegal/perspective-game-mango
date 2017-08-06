@@ -16,34 +16,31 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
+            // Configure the view.1920 × 1272
             
-            view.ignoresSiblingOrder = true
-            
+            let scene = GameScene(size: CGSize(width: 1920, height: 1272))
+            scene.anchorPoint = CGPoint(x:0.5, y:0.5);
+
             view.showsFPS = true
             view.showsNodeCount = true
+            
+            /* Sprite Kit applies additional optimizations to improve rendering performance */
+            view.ignoresSiblingOrder = false
+            
+            scene.scaleMode = .aspectFill
+            
+            view.presentScene(scene)
         }
         ObjcShell.setView(self.view);
-        ObjcShell.loadScene(withName: "test_scene02");
+        ObjcShell.loadScene(withName: "spacecanyon");
     }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .landscapeLeft
     }
 
     override func didReceiveMemoryWarning() {

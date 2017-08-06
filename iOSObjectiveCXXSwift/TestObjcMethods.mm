@@ -12,6 +12,31 @@
 #import "MangoScene.h"
 
 
+@implementation MangoAction
+    -(SKAction *)getAction{
+        return _action;
+    }
+    
+-(id)initWithAction:(SKAction *)action{
+    self = [super init];
+    _action = action;
+    canDelete = false;
+    return self;
+}
+
+-(void)setDeleteBlock:(VoidToVoid)deleteMe{
+    _deleteBlock = deleteMe;
+    canDelete = true;
+}
+    
+-(void)callDeleteMe{
+    if(canDelete){
+        _deleteBlock();
+    }
+}
+
+@end
+
 @implementation MangoUIButton
 
 -(void)setBlocks:(IntToVoid)action withDeleteMe:(IntToVoid)deleteMe{
@@ -24,6 +49,7 @@
 }
 
 -(void)bindToEvent:(UIControlEvents)event {
+    //self.backgroundColor = [UIColor redColor];
     switch (event) {
         case UIControlEventTouchUpInside:
             [self addTarget:self action:@selector(didTouchUpInside:) forControlEvents:event];
@@ -73,15 +99,15 @@ expression * makeSound(expression * arglist, environment * env, environment * ar
     //get wait
     wait = evalAST((expression *)(iter->elem), env, args);
     
-    if(name != NULL && name->type == CONST_EXP) {
+    if(name != NULL && name->type == STR_EXP) {
         fileName = @(name->data.str->s->c_str());
     }
     
     if(wait != NULL && wait->type == CONST_EXP) {
         toWait = wait->data.num;
     }
-    
-    SKAction * snd = [SKAction playSoundFileNamed:fileName waitForCompletion: toWait == 0 ? false : true];
+    NSLog(@"FILETOPLAY %@",fileName);
+    MangoAction * snd = [[MangoAction alloc] initWithAction:[SKAction playSoundFileNamed:fileName waitForCompletion: toWait == 0 ? false : true]];
     
     [actions addObject:snd];
     
@@ -234,18 +260,11 @@ expression * allocateActionsList(expression * arglist, environment * env, enviro
     if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num;
         if(actions != nil){
-            SKAction * action;
+            MangoAction * action;
             for(int i = (int)[actions count] - 1; i >= 0; --i){
                 action = [actions objectAtIndex:i];
                 if(action != nil){
-                    if ([action respondsToSelector:NSSelectorFromString(@"deleteMe")]) {
-                        id keyed = [action valueForKeyPath:@"deleteMe"];
-                        if(keyed != nil){
-                            ((void (^)())keyed)();
-                        }
-                    }else{
-                        NSLog(@"darn");
-                    }
+                    [action callDeleteMe];
                 }
             }
         }
@@ -309,7 +328,7 @@ expression * moveByAnim(expression * arglist, environment * env, environment * a
             duration = 0;
         }
     }
-    SKAction * anim = [SKAction moveBy:CGVectorMake(dy, dy) duration:duration];
+    MangoAction * anim = [[MangoAction alloc] initWithAction:[SKAction moveBy:CGVectorMake(dy, dy) duration:duration]];
     [actions addObject:anim];
     
     //clean everything up
@@ -378,7 +397,9 @@ expression * buttonMaker(expression * arglist, environment * env, environment * 
     if(n != NULL && n->type == STR_EXP){
         name = (char *)(n->data.str->s->c_str());
     }
-
+    
+    xp += _view.frame.size.width / 2 - width / 2;
+    yp += _view.frame.size.height / 2 - height / 2;
 
     MangoUIButton * button = [[MangoUIButton alloc] initWithFrame:CGRectMake(xp, yp, width, height)];
     [button setTitle:@(name) forState:UIControlStateNormal];
@@ -427,12 +448,12 @@ expression * sequenceAction(expression * arglist, environment * env, environment
         if(x != NULL && x->type == CONST_EXP){
             action = x->data.num;
         }
-        [array addObject:[actions objectAtIndex:action]];
+        [array addObject:[(MangoAction *)[actions objectAtIndex:action] getAction]];
         //clean up as we created this via eval ast
         deleteExpression(x);
     }
     
-    SKAction * actn = [SKAction sequence:array];
+    MangoAction * actn = [[MangoAction alloc] initWithAction:[SKAction sequence:array]];
     [actions addObject:actn];
     
     //return index
@@ -465,12 +486,12 @@ expression * groupAction(expression * arglist, environment * env, environment * 
         if(x != NULL && x->type == CONST_EXP){
             action = x->data.num;
         }
-        [array addObject:[actions objectAtIndex:action]];
+        [array addObject:[(MangoAction *)[actions objectAtIndex:action] getAction]];
         //delete it as we created via an eval
         deleteExpression(x);
     }
     
-    SKAction * actn = [SKAction group:array];
+    MangoAction * actn = [[MangoAction alloc] initWithAction:[SKAction group:array]];
     [actions addObject:actn];
     //free the list
     freeList(evaled);
@@ -513,7 +534,7 @@ expression * scaleAnim(expression * arglist, environment * env, environment * ar
             duration = 0;
         }
     }
-    SKAction * anim = [SKAction scaleBy:dx duration:duration];
+    MangoAction * anim = [[MangoAction alloc] initWithAction:[SKAction scaleBy:dx duration:duration]];
     [actions addObject:anim];
     deleteExpression(x);
     deleteExpression(d);
@@ -554,12 +575,12 @@ expression * repeatAction(expression * arglist, environment * env, environment *
             time = -1;
         }
     }
-    SKAction * actn, *source = [actions objectAtIndex:action];
+    MangoAction * actn, *source = [actions objectAtIndex:action];
     if(time == -1){
         NSLog(@"forever");
-        actn = [SKAction repeatActionForever:source];
+        actn = [[MangoAction alloc] initWithAction:[SKAction repeatActionForever:[source getAction]]];
     }else{
-        actn = [SKAction repeatAction:source count:time];
+        actn = [[MangoAction alloc] initWithAction:[SKAction repeatAction:[source getAction] count:time]];
     }
     [actions addObject:actn];
     deleteExpression(act);
@@ -599,9 +620,9 @@ expression * runAction(expression * arglist, environment * env, environment * ar
             nindex = 0;
         }
     }
-    SKAction * a = [actions objectAtIndex:aindex];
+    MangoAction * a = [actions objectAtIndex:aindex];
     SKNode * n = [sprites objectAtIndex:nindex];
-    [n runAction:a];
+    [n runAction:[a getAction]];
     deleteExpression(act);
     deleteExpression(node);
     return NULL;
@@ -641,7 +662,7 @@ expression * rotateAnim(expression * arglist, environment * env, environment * a
             duration = 0;
         }
     }
-    SKAction * anim = [SKAction rotateByAngle:dx duration:duration];
+    MangoAction * anim = [[MangoAction alloc] initWithAction:[SKAction rotateByAngle:dx duration:duration]];
     [actions addObject:anim];
     deleteExpression(x);
     deleteExpression(d);
@@ -665,12 +686,12 @@ expression * eventAnim(expression * arglist, environment * env, environment * ar
     if(list->len != 1)
         return NULL;
     x = copyExpression((expression *)(iter->elem));
-    SKAction * anim = [SKAction runBlock:^{
+    MangoAction * anim = [[MangoAction alloc] initWithAction:[SKAction runBlock:^{
         deleteExpression(evalAST(x, env, args));
-    }];
-    [anim setValue:(id)(^{
+    }]];
+    [anim setDeleteBlock:^{
         deleteExpression(x);
-    }) forKey:@"deleteMe"];
+    }];
     [actions addObject:anim];
     return makeInt(nextActionInd++);
 }
@@ -781,7 +802,7 @@ expression * putOnScreenAtPoint(expression * arglist, environment * env, environ
     float xp = 0, yp = 0;
     int index = 0;
     if(list->len != 3)
-        return NULL;
+    return NULL;
     sprite = evalAST((expression *)(iter->elem), env, args);
     iter = iter->next;
     x = evalAST((expression *)(iter->elem), env, args);
@@ -806,6 +827,26 @@ expression * putOnScreenAtPoint(expression * arglist, environment * env, environ
     deleteExpression(sprite);
     deleteExpression(x);
     deleteExpression(y);
+    return NULL;
+}
+
+expression * removeChild(expression * arglist, environment * env, environment * args){
+    expression * sprite;
+    slist * list = arglist->data.list;
+    snode * iter = list->head;
+    int index = 0;
+    if(list->len != 1)
+    return NULL;
+    sprite = evalAST((expression *)(iter->elem), env, args);
+    if(sprite != NULL && sprite->type == CONST_EXP){
+        index = sprite->data.num;
+        if(index < 0){
+            index = 0;
+        }
+    }
+    SKSpriteNode * spr = [sprites objectAtIndex:index];
+    [spr removeFromParent];
+    deleteExpression(sprite);
     return NULL;
 }
 
@@ -845,6 +886,7 @@ void * createMangoEnvironment(){
     (*ENV)["event"] = makeCFunc(&eventAnim);
     
     (*ENV)["addChild"] = makeCFunc(&putOnScreenAtPoint);
+    (*ENV)["removeChild"] = makeCFunc(&removeChild);
     return (void *)ENV;
 }
 
@@ -857,10 +899,6 @@ badly named function that's running some basic sniffle for the current demo.
  */
 + (void) setScene:(SKScene *)scene{
     globalScene = scene;
-    /*SKSpriteNode * sprite = [[SKSpriteNode alloc] initWithTexture:NULL color:[UIColor redColor] size:CGSizeMake(100, 100)];
-    [sprite setPosition:CGPointMake(10, 10)];
-    [scene addChild:sprite];*/
-
 }
 
 +(MangoScene *)getMainScene{

@@ -38,3 +38,7 @@ playground.xcworkspace
 # Package.pins
 *.build/
 
+
+*.xcuserstate
+
+*.xcuserstate

@@ -23,12 +23,23 @@ static int nextTexInd = 0;
 static int nextActionInd = 0;
 static NSMutableArray * textures = nil;
 typedef void (^IntToVoid)(UIControlEvents);
+typedef void (^VoidToVoid)();
 @interface MangoUIButton : UIButton {
     IntToVoid _actionBlock;
     IntToVoid _deleteBlock;
 }
 -(void)setBlocks:(IntToVoid)action withDeleteMe:(IntToVoid)deleteMe;
 -(void)bindToEvent:(UIControlEvents)event;
+-(void)callDeleteMe;
+@end
+@interface MangoAction : NSObject {
+    bool canDelete;
+    VoidToVoid _deleteBlock;
+    SKAction * _action;
+}
+-(SKAction *)getAction;
+-(id)initWithAction:(SKAction *)action;
+-(void)setDeleteBlock:(VoidToVoid)deleteMe;
 -(void)callDeleteMe;
 @end
 
