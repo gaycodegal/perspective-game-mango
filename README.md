@@ -5,11 +5,12 @@
 ## Currently Implemented Features
 
 ### New
-1) Buttons creatable from scripting language. -steph
-1) Event management for mation ending, music ending, button presses, scene loading, and device interrupts. -steph
-1) Load Scenes from files. -steph
+1) Space Canyon Path Scene & Puzzle Added. -steph
 
 ### Previously
+1) Buttons creatable from scripting language. -steph
+1) Event management for anamation ending, music ending, button presses, scene loading, and device interrupts. -steph
+1) Load Scenes from files. -steph
 1) A scripting language.
 1) Can display media (images) on screen via Sniffle (the scripting language)
 1) Can attach animations to media via Sniffle
