@@ -5,7 +5,9 @@
 ## Currently Implemented Features
 
 ### New
-1) Space Canyon Path Scene & Puzzle Added. -steph
+1) Space Canyon path scene & puzzle added. -steph
+1) Forest path puzzle added. -steph
+1) Scene selection menu added. -steph
 
 ### Previously
 1) Buttons creatable from scripting language. -steph
