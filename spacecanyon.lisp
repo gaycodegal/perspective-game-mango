@@ -1,6 +1,7 @@
 (SpriteAlloc 10)
 (TextureAlloc 10)
 (ActionAlloc 11)
+(ButtonAlloc 10)
 
 (set note1 (sound "note1.mp3" 1))
 (set note2 (sound "note2.mp3" 1))
@@ -17,6 +18,7 @@
 (set sprite4 (Sprite 1920 1272 bg2))
 (addChild sprite3 0 0)
 (set curplayer (Sprite 0 0 lowcat))
+
 (addChild curplayer 0 0)
 (set button1 (Button -100 -100 100 100 "Touch 1" (begin
 (run note1 curplayer)
@@ -46,6 +48,7 @@
 (run (sequence note4 (event (begin
 (addChild sprite4 0 0)
 (removeChild sprite3)
+(Button 50 -50 200 200 "Touch 5" (loadScene "basicmenu"))
 ))) curplayer)
 
 ))

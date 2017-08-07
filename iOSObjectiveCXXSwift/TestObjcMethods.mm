@@ -181,11 +181,15 @@ expression * allocateButtonList(expression * arglist, environment * env, environ
     //check that we have the right type (types are found in lispinclude.h)
     //type definitions in datastructures & expressions
     //also make sure non null as null is a valid sniffle exp
+    NSLog(@"No0?");
     if(temp != NULL && temp->type == CONST_EXP){
         size = temp->data.num; // get the size
+        NSLog(@"No1?");
         if(buttons!=nil){
+            NSLog(@"No2?");
             for (int i = 0; i<nextButtonInd; ++i) {
                 MangoUIButton * b = [buttons objectAtIndex:i];
+                NSLog(@"No3?");
                 [b removeFromSuperview];
                 [b callDeleteMe];
             }
@@ -767,7 +771,7 @@ expression * textureFromImage(expression * arglist, environment * env, environme
     snode * iter = list->head;
     const char * loc = NULL;
     if(list->len != 1)
-        return NULL;
+    return NULL;
     image = evalAST((expression *)(iter->elem), env, args);
     if(image != NULL && image->type == STR_EXP){
         loc = image->data.str->s->c_str();
@@ -779,6 +783,32 @@ expression * textureFromImage(expression * arglist, environment * env, environme
     }
     [textures addObject:tex];
     deleteExpression(image);
+    return makeInt(nextTexInd++);
+}
+
+expression * loadScene(expression * arglist, environment * env, environment * args){
+    expression *image;
+    slist * list = arglist->data.list;
+    snode * iter = list->head;
+    const char * loc = NULL;
+    if(list->len != 1)
+    return NULL;
+    image = evalAST((expression *)(iter->elem), env, args);
+    if(image != NULL && image->type == STR_EXP){
+        loc = image->data.str->s->c_str();
+    }
+    if(loc != NULL){
+        NSString * strin = [NSString stringWithCString:loc encoding:NSASCIIStringEncoding];
+        
+        for(SKNode * child in [globalScene children]) {
+            [child setPaused:YES];
+            [child removeFromParent];
+            [child removeAllActions];
+        }
+        if(MAIN_SCENE != NULL)
+        [MAIN_SCENE loadSceneWithName:strin];
+        
+    }
     return makeInt(nextTexInd++);
 }
 
@@ -884,6 +914,8 @@ void * createMangoEnvironment(){
     (*ENV)["run"] = makeCFunc(&runAction);
     
     (*ENV)["event"] = makeCFunc(&eventAnim);
+    
+    (*ENV)["loadScene"] = makeCFunc(&loadScene);
     
     (*ENV)["addChild"] = makeCFunc(&putOnScreenAtPoint);
     (*ENV)["removeChild"] = makeCFunc(&removeChild);

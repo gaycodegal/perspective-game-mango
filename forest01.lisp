@@ -1,8 +1,8 @@
 (SpriteAlloc 10)
 (TextureAlloc 10)
 (ActionAlloc 11)
+(ButtonAlloc 10)
 
-(set background (sound "GymnopedieNo1KevinMacleod.mp3" 1))
 
 (set puzzlestate 0)
 
@@ -15,7 +15,6 @@
 (addChild sprite3 0 0)
 
 (set curplayer (Sprite 0 0 lowcat))
-
 (addChild curplayer 0 0)
 
 (set button1 (Button 90 130 50 50 "first" (begin
@@ -31,7 +30,7 @@
 (begin
 (addChild sprite4 0 0)
 (removeChild sprite3)
-(set button2 (Button 180 -90 180 180 "second" ()))
+(set button2 (Button 180 -90 180 180 "second" (loadScene "basicmenu")))
 
 )
 
