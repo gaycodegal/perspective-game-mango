@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
             view.presentScene(scene)
         }
         ObjcShell.setView(self.view);
-        ObjcShell.loadScene(withName: "spacecanyon");
+        ObjcShell.loadScene(withName: "forest01");
     }
 
     override var shouldAutorotate: Bool {

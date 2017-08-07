@@ -13,8 +13,6 @@
 (set bg1 (Texture "spacecanyonenterance.png"))
 (set bg2 (Texture "spacecanyonopen.png"))
 
-(set sprite1 (Sprite 100 100 lowcat))
-(set sprite2 (Sprite 200 300 lowcat))
 (set sprite3 (Sprite 1920 1272 bg1))
 (set sprite4 (Sprite 1920 1272 bg2))
 (addChild sprite3 0 0)
