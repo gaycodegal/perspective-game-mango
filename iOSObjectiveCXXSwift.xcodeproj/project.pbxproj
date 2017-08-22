@@ -13,6 +13,9 @@
 		1806BF5E1F362BA700FEF6FE /* note4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1806BF5A1F362BA700FEF6FE /* note4.mp3 */; };
 		1806BF601F362C6D00FEF6FE /* spacecanyon.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 1806BF5F1F362C6D00FEF6FE /* spacecanyon.lisp */; };
 		181620651F19B71600F1A1B4 /* MangoScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 181620641F19B71600F1A1B4 /* MangoScene.mm */; };
+		1826B3DF1F4A441200EC7450 /* puzzle01.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 1826B3DE1F4A441200EC7450 /* puzzle01.lisp */; };
+		1826B3E21F4A441900EC7450 /* puzzle01.png in Resources */ = {isa = PBXBuildFile; fileRef = 1826B3E01F4A441900EC7450 /* puzzle01.png */; };
+		1826B3E31F4A441900EC7450 /* puzzle01a.png in Resources */ = {isa = PBXBuildFile; fileRef = 1826B3E11F4A441900EC7450 /* puzzle01a.png */; };
 		183791371F375D050016F042 /* spacecanyonenterance.png in Resources */ = {isa = PBXBuildFile; fileRef = 183791361F375D050016F042 /* spacecanyonenterance.png */; };
 		183791391F376D960016F042 /* spacecanyonopen.png in Resources */ = {isa = PBXBuildFile; fileRef = 183791381F376D960016F042 /* spacecanyonopen.png */; };
 		1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1854580D1EEC9141001BF5BB /* lowpolycat.png */; };
@@ -50,6 +53,9 @@
 		1806BF5F1F362C6D00FEF6FE /* spacecanyon.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spacecanyon.lisp; sourceTree = "<group>"; };
 		181620631F19B71600F1A1B4 /* MangoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangoScene.h; sourceTree = "<group>"; };
 		181620641F19B71600F1A1B4 /* MangoScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MangoScene.mm; sourceTree = "<group>"; };
+		1826B3DE1F4A441200EC7450 /* puzzle01.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = puzzle01.lisp; sourceTree = "<group>"; };
+		1826B3E01F4A441900EC7450 /* puzzle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puzzle01.png; path = images/puzzle01.png; sourceTree = "<group>"; };
+		1826B3E11F4A441900EC7450 /* puzzle01a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puzzle01a.png; path = images/puzzle01a.png; sourceTree = "<group>"; };
 		183791361F375D050016F042 /* spacecanyonenterance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spacecanyonenterance.png; path = images/spacecanyonenterance.png; sourceTree = "<group>"; };
 		183791381F376D960016F042 /* spacecanyonopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spacecanyonopen.png; path = images/spacecanyonopen.png; sourceTree = "<group>"; };
 		1854580D1EEC9141001BF5BB /* lowpolycat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowpolycat.png; sourceTree = "<group>"; };
@@ -111,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				18614F971F37F0FE0088E514 /* forest01.png */,
+				1826B3E01F4A441900EC7450 /* puzzle01.png */,
+				1826B3E11F4A441900EC7450 /* puzzle01a.png */,
 				18614F981F37F0FE0088E514 /* forest02.png */,
 				183791381F376D960016F042 /* spacecanyonopen.png */,
 				183791361F375D050016F042 /* spacecanyonenterance.png */,
@@ -210,6 +218,7 @@
 			children = (
 				18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */,
 				18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */,
+				1826B3DE1F4A441200EC7450 /* puzzle01.lisp */,
 				1806BF5F1F362C6D00FEF6FE /* spacecanyon.lisp */,
 				18614F9B1F37F10D0088E514 /* forest01.lisp */,
 				18614F9D1F37FDC20088E514 /* basicmenu.lisp */,
@@ -325,9 +334,12 @@
 				18AD896C1F1BFAD900EA2AA0 /* test_scene.lisp in Resources */,
 				1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */,
 				18BDB8FE1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 in Resources */,
+				1826B3DF1F4A441200EC7450 /* puzzle01.lisp in Resources */,
+				1826B3E21F4A441900EC7450 /* puzzle01.png in Resources */,
 				1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */,
 				1806BF5E1F362BA700FEF6FE /* note4.mp3 in Resources */,
 				183791391F376D960016F042 /* spacecanyonopen.png in Resources */,
+				1826B3E31F4A441900EC7450 /* puzzle01a.png in Resources */,
 				1885FCF41EEB2B22009F6579 /* Actions.sks in Resources */,
 				1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */,
 				18614F991F37F0FE0088E514 /* forest01.png in Resources */,

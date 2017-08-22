@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Configure the view.1920 × 1272
             
-            let scene = GameScene(size: CGSize(width: 1920, height: 1272))
+            let scene = GameScene(size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height))
             scene.anchorPoint = CGPoint(x:0.5, y:0.5);
 
             view.showsFPS = true
@@ -26,14 +26,14 @@ class GameViewController: UIViewController {
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             view.ignoresSiblingOrder = false
-            
+            scene.backgroundColor = UIColor.white
             scene.scaleMode = .aspectFill
             scene.run(SKAction.repeatForever(SKAction.playSoundFileNamed("GymnopedieNo1KevinMacleod.mp3", waitForCompletion: true)))
             
             view.presentScene(scene)
         }
         ObjcShell.setView(self.view);
-        ObjcShell.loadScene(withName: "basicmenu");
+        ObjcShell.loadScene(withName: "puzzle01");
     }
 
     override var shouldAutorotate: Bool {
