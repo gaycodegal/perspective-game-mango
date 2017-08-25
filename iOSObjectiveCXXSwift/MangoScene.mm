@@ -16,14 +16,14 @@
 }
 
 -(void)loadSceneWithName:(NSString *)name{
-    if(ENV != NULL)
-        deleteEnv(ENV);
+    if(ENV == NULL)
+        ENV = (environment *)createMangoEnvironment();
     NSString* path = [[NSBundle mainBundle] pathForResource:name
                                                      ofType:@"lisp"];
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
-    ENV = (environment *)createMangoEnvironment();
+    
     [self runString:content];
     [self triggerEvent:@"SCENE_LOAD"];
 }

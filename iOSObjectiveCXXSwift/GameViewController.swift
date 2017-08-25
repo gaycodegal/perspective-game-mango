@@ -28,12 +28,12 @@ class GameViewController: UIViewController {
             view.ignoresSiblingOrder = false
             scene.backgroundColor = UIColor.white
             scene.scaleMode = .aspectFill
-            scene.run(SKAction.repeatForever(SKAction.playSoundFileNamed("GymnopedieNo1KevinMacleod.mp3", waitForCompletion: true)))
+            //scene.run(SKAction.repeatForever(SKAction.playSoundFileNamed("GymnopedieNo1KevinMacleod.mp3", waitForCompletion: true)))
             
             view.presentScene(scene)
         }
         ObjcShell.setView(self.view);
-        ObjcShell.loadScene(withName: "puzzle01");
+        ObjcShell.loadScene(withName: "begin01");
     }
 
     override var shouldAutorotate: Bool {

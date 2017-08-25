@@ -18,11 +18,20 @@
 		1826B3E31F4A441900EC7450 /* puzzle01a.png in Resources */ = {isa = PBXBuildFile; fileRef = 1826B3E11F4A441900EC7450 /* puzzle01a.png */; };
 		183791371F375D050016F042 /* spacecanyonenterance.png in Resources */ = {isa = PBXBuildFile; fileRef = 183791361F375D050016F042 /* spacecanyonenterance.png */; };
 		183791391F376D960016F042 /* spacecanyonopen.png in Resources */ = {isa = PBXBuildFile; fileRef = 183791381F376D960016F042 /* spacecanyonopen.png */; };
+		1847683D1F4F26AA00C935BD /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 1847683C1F4F26AA00C935BD /* white.png */; };
+		184768421F5083BA00C935BD /* manor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1847683E1F5083BA00C935BD /* manor.png */; };
+		184768431F5083BA00C935BD /* psize.png in Resources */ = {isa = PBXBuildFile; fileRef = 1847683F1F5083BA00C935BD /* psize.png */; };
+		184768441F5083BA00C935BD /* pspace.png in Resources */ = {isa = PBXBuildFile; fileRef = 184768401F5083BA00C935BD /* pspace.png */; };
+		184768451F5083BA00C935BD /* ptime.png in Resources */ = {isa = PBXBuildFile; fileRef = 184768411F5083BA00C935BD /* ptime.png */; };
+		184768481F5083C000C935BD /* gateclosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 184768461F5083C000C935BD /* gateclosed.png */; };
+		184768491F5083C000C935BD /* gateopen.png in Resources */ = {isa = PBXBuildFile; fileRef = 184768471F5083C000C935BD /* gateopen.png */; };
+		1847684B1F5083C700C935BD /* beginning.png in Resources */ = {isa = PBXBuildFile; fileRef = 1847684A1F5083C700C935BD /* beginning.png */; };
+		1847684D1F5083F400C935BD /* youwon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1847684C1F5083F400C935BD /* youwon.png */; };
 		1854580E1EEC9141001BF5BB /* lowpolycat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1854580D1EEC9141001BF5BB /* lowpolycat.png */; };
 		18614F991F37F0FE0088E514 /* forest01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18614F971F37F0FE0088E514 /* forest01.png */; };
 		18614F9A1F37F0FE0088E514 /* forest02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18614F981F37F0FE0088E514 /* forest02.png */; };
 		18614F9C1F37F10D0088E514 /* forest01.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18614F9B1F37F10D0088E514 /* forest01.lisp */; };
-		18614F9E1F37FDC20088E514 /* basicmenu.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18614F9D1F37FDC20088E514 /* basicmenu.lisp */; };
+		18614F9E1F37FDC20088E514 /* manor.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18614F9D1F37FDC20088E514 /* manor.lisp */; };
 		1864A64B1EFC9BF500D51311 /* expressions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6441EFC9BF500D51311 /* expressions.cpp */; };
 		1864A64C1EFC9BF500D51311 /* filereader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6451EFC9BF500D51311 /* filereader.cpp */; };
 		1864A64D1EFC9BF500D51311 /* interp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1864A6461EFC9BF500D51311 /* interp.cpp */; };
@@ -39,6 +48,13 @@
 		1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFC1EEB2B22009F6579 /* Assets.xcassets */; };
 		1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1885FCFE1EEB2B22009F6579 /* LaunchScreen.storyboard */; };
 		1885FD0E1EEB2D37009F6579 /* TestObjcMethods.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */; };
+		189B60871F50856800749F15 /* begin01.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B60861F50856800749F15 /* begin01.lisp */; };
+		189B60891F50A6C400749F15 /* begin02.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B60881F50A6C400749F15 /* begin02.lisp */; };
+		189B608D1F50D81800749F15 /* winSize.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B608A1F50D81800749F15 /* winSize.lisp */; };
+		189B608E1F50D81800749F15 /* winSpace.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B608B1F50D81800749F15 /* winSpace.lisp */; };
+		189B608F1F50D81800749F15 /* winTime.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B608C1F50D81800749F15 /* winTime.lisp */; };
+		189B60911F50D9C100749F15 /* winwin.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B60901F50D9C100749F15 /* winwin.lisp */; };
+		189B60931F50D9D100749F15 /* totem.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 189B60921F50D9D100749F15 /* totem.lisp */; };
 		18AD896C1F1BFAD900EA2AA0 /* test_scene.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */; };
 		18AD896E1F1BFBBE00EA2AA0 /* test_scene02.lisp in Resources */ = {isa = PBXBuildFile; fileRef = 18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */; };
 		18BDB8FE1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18BDB8FD1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 */; };
@@ -58,11 +74,20 @@
 		1826B3E11F4A441900EC7450 /* puzzle01a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puzzle01a.png; path = images/puzzle01a.png; sourceTree = "<group>"; };
 		183791361F375D050016F042 /* spacecanyonenterance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spacecanyonenterance.png; path = images/spacecanyonenterance.png; sourceTree = "<group>"; };
 		183791381F376D960016F042 /* spacecanyonopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spacecanyonopen.png; path = images/spacecanyonopen.png; sourceTree = "<group>"; };
+		1847683C1F4F26AA00C935BD /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white.png; path = images/white.png; sourceTree = "<group>"; };
+		1847683E1F5083BA00C935BD /* manor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = manor.png; path = images/manor.png; sourceTree = "<group>"; };
+		1847683F1F5083BA00C935BD /* psize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = psize.png; path = images/psize.png; sourceTree = "<group>"; };
+		184768401F5083BA00C935BD /* pspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pspace.png; path = images/pspace.png; sourceTree = "<group>"; };
+		184768411F5083BA00C935BD /* ptime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ptime.png; path = images/ptime.png; sourceTree = "<group>"; };
+		184768461F5083C000C935BD /* gateclosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gateclosed.png; path = images/gateclosed.png; sourceTree = "<group>"; };
+		184768471F5083C000C935BD /* gateopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gateopen.png; path = images/gateopen.png; sourceTree = "<group>"; };
+		1847684A1F5083C700C935BD /* beginning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beginning.png; path = images/beginning.png; sourceTree = "<group>"; };
+		1847684C1F5083F400C935BD /* youwon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youwon.png; path = images/youwon.png; sourceTree = "<group>"; };
 		1854580D1EEC9141001BF5BB /* lowpolycat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowpolycat.png; sourceTree = "<group>"; };
 		18614F971F37F0FE0088E514 /* forest01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forest01.png; path = images/forest01.png; sourceTree = "<group>"; };
 		18614F981F37F0FE0088E514 /* forest02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forest02.png; path = images/forest02.png; sourceTree = "<group>"; };
 		18614F9B1F37F10D0088E514 /* forest01.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forest01.lisp; sourceTree = "<group>"; };
-		18614F9D1F37FDC20088E514 /* basicmenu.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basicmenu.lisp; sourceTree = "<group>"; };
+		18614F9D1F37FDC20088E514 /* manor.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = manor.lisp; sourceTree = "<group>"; };
 		1864A6441EFC9BF500D51311 /* expressions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expressions.cpp; sourceTree = "<group>"; };
 		1864A6451EFC9BF500D51311 /* filereader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filereader.cpp; sourceTree = "<group>"; };
 		1864A6461EFC9BF500D51311 /* interp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interp.cpp; sourceTree = "<group>"; };
@@ -93,6 +118,13 @@
 		1885FD0B1EEB2D37009F6579 /* iOSObjectiveCXXSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSObjectiveCXXSwift-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		1885FD0C1EEB2D37009F6579 /* TestObjcMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjcMethods.h; sourceTree = "<group>"; };
 		1885FD0D1EEB2D37009F6579 /* TestObjcMethods.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestObjcMethods.mm; sourceTree = "<group>"; };
+		189B60861F50856800749F15 /* begin01.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = begin01.lisp; sourceTree = "<group>"; };
+		189B60881F50A6C400749F15 /* begin02.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = begin02.lisp; sourceTree = "<group>"; };
+		189B608A1F50D81800749F15 /* winSize.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winSize.lisp; sourceTree = "<group>"; };
+		189B608B1F50D81800749F15 /* winSpace.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winSpace.lisp; sourceTree = "<group>"; };
+		189B608C1F50D81800749F15 /* winTime.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winTime.lisp; sourceTree = "<group>"; };
+		189B60901F50D9C100749F15 /* winwin.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winwin.lisp; sourceTree = "<group>"; };
+		189B60921F50D9D100749F15 /* totem.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = totem.lisp; sourceTree = "<group>"; };
 		18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_scene.lisp; sourceTree = "<group>"; };
 		18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_scene02.lisp; sourceTree = "<group>"; };
 		18BDB8FD1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GymnopedieNo1KevinMacleod.mp3; path = iOSObjectiveCXXSwift/resources/GymnopedieNo1KevinMacleod.mp3; sourceTree = "<group>"; };
@@ -117,6 +149,15 @@
 			isa = PBXGroup;
 			children = (
 				18614F971F37F0FE0088E514 /* forest01.png */,
+				1847683C1F4F26AA00C935BD /* white.png */,
+				1847683E1F5083BA00C935BD /* manor.png */,
+				1847683F1F5083BA00C935BD /* psize.png */,
+				184768461F5083C000C935BD /* gateclosed.png */,
+				1847684C1F5083F400C935BD /* youwon.png */,
+				1847684A1F5083C700C935BD /* beginning.png */,
+				184768471F5083C000C935BD /* gateopen.png */,
+				184768401F5083BA00C935BD /* pspace.png */,
+				184768411F5083BA00C935BD /* ptime.png */,
 				1826B3E01F4A441900EC7450 /* puzzle01.png */,
 				1826B3E11F4A441900EC7450 /* puzzle01a.png */,
 				18614F981F37F0FE0088E514 /* forest02.png */,
@@ -219,9 +260,16 @@
 				18AD896B1F1BFAD900EA2AA0 /* test_scene.lisp */,
 				18AD896D1F1BFBBE00EA2AA0 /* test_scene02.lisp */,
 				1826B3DE1F4A441200EC7450 /* puzzle01.lisp */,
+				189B60881F50A6C400749F15 /* begin02.lisp */,
 				1806BF5F1F362C6D00FEF6FE /* spacecanyon.lisp */,
+				189B608A1F50D81800749F15 /* winSize.lisp */,
+				189B60901F50D9C100749F15 /* winwin.lisp */,
+				189B608B1F50D81800749F15 /* winSpace.lisp */,
+				189B608C1F50D81800749F15 /* winTime.lisp */,
 				18614F9B1F37F10D0088E514 /* forest01.lisp */,
-				18614F9D1F37FDC20088E514 /* basicmenu.lisp */,
+				189B60861F50856800749F15 /* begin01.lisp */,
+				189B60921F50D9D100749F15 /* totem.lisp */,
+				18614F9D1F37FDC20088E514 /* manor.lisp */,
 			);
 			name = Scenes;
 			path = ..;
@@ -322,22 +370,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				18614F9C1F37F10D0088E514 /* forest01.lisp in Resources */,
+				189B608E1F50D81800749F15 /* winSpace.lisp in Resources */,
+				189B60891F50A6C400749F15 /* begin02.lisp in Resources */,
 				1806BF5D1F362BA700FEF6FE /* note3.mp3 in Resources */,
+				184768441F5083BA00C935BD /* pspace.png in Resources */,
+				189B60871F50856800749F15 /* begin01.lisp in Resources */,
+				189B608F1F50D81800749F15 /* winTime.lisp in Resources */,
 				1885FCFB1EEB2B22009F6579 /* Main.storyboard in Resources */,
-				18614F9E1F37FDC20088E514 /* basicmenu.lisp in Resources */,
+				1847684B1F5083C700C935BD /* beginning.png in Resources */,
+				18614F9E1F37FDC20088E514 /* manor.lisp in Resources */,
 				18614F9A1F37F0FE0088E514 /* forest02.png in Resources */,
+				184768491F5083C000C935BD /* gateopen.png in Resources */,
+				1847683D1F4F26AA00C935BD /* white.png in Resources */,
 				1885FCF21EEB2B22009F6579 /* GameScene.sks in Resources */,
 				183791371F375D050016F042 /* spacecanyonenterance.png in Resources */,
 				1806BF5C1F362BA700FEF6FE /* note2.mp3 in Resources */,
+				189B608D1F50D81800749F15 /* winSize.lisp in Resources */,
 				1806BF601F362C6D00FEF6FE /* spacecanyon.lisp in Resources */,
+				184768451F5083BA00C935BD /* ptime.png in Resources */,
+				1847684D1F5083F400C935BD /* youwon.png in Resources */,
+				189B60931F50D9D100749F15 /* totem.lisp in Resources */,
 				1806BF5B1F362BA700FEF6FE /* note1.mp3 in Resources */,
+				184768421F5083BA00C935BD /* manor.png in Resources */,
 				18AD896C1F1BFAD900EA2AA0 /* test_scene.lisp in Resources */,
+				184768481F5083C000C935BD /* gateclosed.png in Resources */,
 				1885FCFD1EEB2B22009F6579 /* Assets.xcassets in Resources */,
 				18BDB8FE1F01E23800CDB603 /* GymnopedieNo1KevinMacleod.mp3 in Resources */,
+				184768431F5083BA00C935BD /* psize.png in Resources */,
 				1826B3DF1F4A441200EC7450 /* puzzle01.lisp in Resources */,
 				1826B3E21F4A441900EC7450 /* puzzle01.png in Resources */,
 				1885FD001EEB2B22009F6579 /* LaunchScreen.storyboard in Resources */,
 				1806BF5E1F362BA700FEF6FE /* note4.mp3 in Resources */,
+				189B60911F50D9C100749F15 /* winwin.lisp in Resources */,
 				183791391F376D960016F042 /* spacecanyonopen.png in Resources */,
 				1826B3E31F4A441900EC7450 /* puzzle01a.png in Resources */,
 				1885FCF41EEB2B22009F6579 /* Actions.sks in Resources */,

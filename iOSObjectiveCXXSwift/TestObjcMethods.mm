@@ -49,7 +49,7 @@
 }
 
 -(void)bindToEvent:(UIControlEvents)event {
-    //self.backgroundColor = [UIColor redColor];
+    //self.backgroundColor = [UIColor colorWithRed:1 green:0 blue:1 alpha:0.5];
     switch (event) {
         case UIControlEventTouchUpInside:
             [self addTarget:self action:@selector(didTouchUpInside:) forControlEvents:event];
@@ -407,6 +407,7 @@ expression * buttonMaker(expression * arglist, environment * env, environment * 
 
     MangoUIButton * button = [[MangoUIButton alloc] initWithFrame:CGRectMake(xp, yp, width, height)];
     [button setTitle:@(name) forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button setBlocks:^(UIControlEvents) {
         deleteExpression(evalAST(e, env, args));
     } withDeleteMe:^(UIControlEvents) {
