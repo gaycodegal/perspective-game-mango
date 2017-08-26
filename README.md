@@ -5,11 +5,13 @@
 ## Currently Implemented Features
 
 ### New
+1) Full basic game content & time puzzle. -steph
+1) Presentation on game content. -steph & greg
+
+### Previously
 1) Space Canyon path scene & puzzle added. -steph
 1) Forest path puzzle added. -steph
 1) Scene selection menu added. -steph
-
-### Previously
 1) Buttons creatable from scripting language. -steph
 1) Event management for anamation ending, music ending, button presses, scene loading, and device interrupts. -steph
 1) Load Scenes from files. -steph
