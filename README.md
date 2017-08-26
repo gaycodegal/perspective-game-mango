@@ -2,6 +2,10 @@
 
 *I pledge my honor that I have abided by the Stevens Honor System*
 
+## Running the Project
+
+To run this project simply open the iOSObjectiveCXXSwift.xcworkspace file with xcode and run it, try an iphone 7 simulator or something similar to run it on. Tap around on the app screen to navigate the game content. Documenting comments for the sniffle interpreter are located in the headers group in the xcode files list. TestObjcMethods.mm has some additional documenting comments.
+
 ## Currently Implemented Features
 
 ### New
